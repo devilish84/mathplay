@@ -1,56 +1,93 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { setLanguage } from '../store/settingsSlice'
-import { useTranslation, LANGUAGES } from '../i18n'
+import { useState } from 'react'
+import { ALL_LEVELS } from '../levels'
 
 const CATEGORIES = [
-  { id: 'add',   key: 'addition',    icon: '➕', color: 'cat-add', available: true  },
-  { id: 'sub',   key: 'subtraction', icon: '➖', color: 'cat-sub', available: true  },
-  { id: 'seq',   key: 'sequences',   icon: '🔢', color: 'cat-seq', available: true  },
-  { id: 'units', key: 'units',       icon: '📏', color: 'cat-units', available: false },
+  { id: 'sub', label: 'Vähennyslaskut', icon: '➖' },
+  { id: 'add', label: 'Yhteenlaskut',   icon: '➕' },
+  { id: 'seq', label: 'Lukujonot',      icon: '🔢' },
 ]
 
+const STAR_OPTIONS = [1, 2, 3, 4]
+
+function StarRow({ count }) {
+  return <span className="task-stars">{'⭐'.repeat(count)}</span>
+}
+
 export default function Home({ onSelect }) {
-  const t        = useTranslation()
-  const dispatch = useDispatch()
-  const language = useSelector((s) => s.settings.language)
+  const [filterCat,   setFilterCat]   = useState(null)
+  const [filterStars, setFilterStars] = useState(null)
+
+  const visible = ALL_LEVELS.filter((l) => {
+    if (filterCat   && l.category !== filterCat)   return false
+    if (filterStars && l.stars    !== filterStars) return false
+    return true
+  })
+
+  function toggleCat(id) {
+    setFilterCat((prev) => (prev === id ? null : id))
+  }
+
+  function toggleStars(n) {
+    setFilterStars((prev) => (prev === n ? null : n))
+  }
 
   return (
     <div className="home-screen">
-      <header className="home-header">
-        <h1 className="home-title">{t('home.title')}</h1>
-        <select
-          className="lang-select"
-          value={language}
-          onChange={(e) => dispatch(setLanguage(e.target.value))}
-        >
-          {LANGUAGES.map((l) => (
-            <option key={l.code} value={l.code}>{l.label}</option>
+      <h1 className="home-title">
+        {filterCat
+          ? CATEGORIES.find((c) => c.id === filterCat)?.icon + ' ' +
+            CATEGORIES.find((c) => c.id === filterCat)?.label
+          : '📚 Kaikki tehtävät'}
+      </h1>
+
+      <div className="filter-bar">
+        <div className="filter-section">
+          {CATEGORIES.map((c) => (
+            <button
+              key={c.id}
+              className={`filter-chip${filterCat === c.id ? ' active' : ''}`}
+              onClick={() => toggleCat(c.id)}
+            >
+              {c.icon} {c.label}
+            </button>
           ))}
-        </select>
-      </header>
+        </div>
 
-      <p className="home-subtitle">{t('home.subtitle')}</p>
+        <div className="filter-divider" />
 
-      <div className="home-grid">
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat.id}
-            className={`cat-card ${cat.color}${cat.available ? '' : ' cat-disabled'}`}
-            onClick={() => cat.available && onSelect(cat.id)}
-            disabled={!cat.available}
-          >
-            <span className="cat-icon">{cat.icon}</span>
-            <div className="cat-body">
-              <div className="cat-name">{t(`home.categories.${cat.key}`)}</div>
-              <div className="cat-range">
-                {cat.available
-                  ? t(`home.levelRange.${cat.key}`)
-                  : t('home.categories.comingSoon')}
-              </div>
-            </div>
-          </button>
-        ))}
+        <div className="filter-section">
+          {STAR_OPTIONS.map((n) => (
+            <button
+              key={n}
+              className={`filter-chip${filterStars === n ? ' active' : ''}`}
+              onClick={() => toggleStars(n)}
+            >
+              {'⭐'.repeat(n)}
+            </button>
+          ))}
+        </div>
       </div>
+
+      {visible.length === 0 ? (
+        <p className="home-empty">Ei tehtäviä valituilla suodattimilla.</p>
+      ) : (
+        <div className="task-grid">
+          {visible.map((level) => (
+            <button
+              key={level.id}
+              className={`task-card cat-${level.category}`}
+              onClick={() => onSelect({ level, category: level.category })}
+            >
+              <span className="task-cat-label">
+                {level.categoryIcon} {level.categoryLabel}
+              </span>
+              <span className="task-title">{level.title}</span>
+              <span className="task-desc">{level.desc}</span>
+              <StarRow count={level.stars} />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

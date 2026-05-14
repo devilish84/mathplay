@@ -13,11 +13,53 @@ body {
 #root {
   width: 100%;
   min-height: 100vh;
+}
+
+/* ── App shell ── */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px 40px;
+}
+
+/* ── Toolbar ── */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
+  gap: 1rem;
+  padding: 0 1.25rem;
+  height: 56px;
+  background: rgba(30, 41, 59, 0.95);
+  backdrop-filter: blur(8px);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
+
+.toolbar-brand {
+  font-size: 1.15rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.toolbar-progress {
+  flex: 1;
+  text-align: center;
+  font-size: 0.88rem;
+  color: #94a3b8;
+}
+
+.toolbar-progress strong { color: #e2e8f0; }
 
 /* ── Level Select ── */
 .level-select {
@@ -743,84 +785,126 @@ body {
 .carry-box-input.carry-wrong   { border-color: #d63031; background: #ffe4e4; }
 .carry-box-input.carry-missing { border-color: #ffc107; background: #fffbea; }
 
-/* ── Home screen (grid) ── */
+/* ── Home screen ── */
 .home-screen {
-  background: white;
-  border-radius: 24px;
-  padding: 40px 36px 48px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-  max-width: 600px;
   width: 100%;
-}
-
-.home-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 6px;
+  max-width: 960px;
 }
 
 .home-title {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  color: #2d3436;
+  color: #1e293b;
+  margin-bottom: 1rem;
 }
 
 .lang-select {
-  background: #f0f0f0;
-  border: none;
-  border-radius: 10px;
-  padding: 8px 14px;
-  font-size: 0.95rem;
-  color: #636e72;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.88rem;
+  color: white;
   cursor: pointer;
   outline: none;
 }
-.lang-select:hover { background: #e0e0e0; }
+.lang-select:hover { background: rgba(255,255,255,0.25); }
+.lang-select option { background: #1e293b; color: white; }
 
-.home-subtitle {
-  color: #636e72;
-  font-size: 1rem;
-  margin-bottom: 28px;
-}
-
-.home-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.cat-card {
-  border: none;
-  border-radius: 20px;
-  padding: 24px 20px;
+/* ── Filter bar ── */
+.filter-bar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.filter-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(30,41,59,0.2);
+  margin: 0 0.25rem;
+  align-self: center;
+}
+
+.filter-chip {
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  border: 2px solid rgba(30,41,59,0.2);
+  background: white;
+  cursor: pointer;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #475569;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.filter-chip:hover { border-color: #94a3b8; background: #f8fafc; }
+.filter-chip.active { background: #1e293b; color: white; border-color: #1e293b; }
+
+.home-empty {
+  color: #94a3b8;
+  font-size: 1rem;
+  text-align: center;
+  padding: 3rem 0;
+}
+
+/* ── Task card grid ── */
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.task-card {
+  border: none;
+  border-radius: 16px;
+  padding: 1.1rem 1rem 1rem;
   cursor: pointer;
   text-align: left;
   color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
   transition: transform 0.15s, box-shadow 0.15s;
+  min-height: 120px;
 }
-.cat-card:hover:not(:disabled) {
+.task-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 28px rgba(0,0,0,0.2);
 }
 
-.cat-icon {
-  font-size: 2.2rem;
-  flex-shrink: 0;
-}
-
-.cat-name {
-  font-size: 1.1rem;
+.task-cat-label {
+  font-size: 0.7rem;
   font-weight: 700;
-  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.8;
 }
 
-.cat-range {
+.task-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-top: 0.3rem;
+  line-height: 1.3;
+}
+
+.task-desc {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.task-stars {
+  margin-top: auto;
+  padding-top: 0.5rem;
   font-size: 0.82rem;
-  opacity: 0.88;
 }
 
 .cat-add   { background: linear-gradient(135deg, #55efc4, #00b894); }

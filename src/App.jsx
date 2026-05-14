@@ -1,16 +1,31 @@
 import { useState } from 'react'
 import './App.css'
+import Toolbar from './common/Toolbar'
 import Home from './screens/Home'
-import SubtractionPage from './subtraction/SubtractionPage'
-import AdditionPage from './addition/AdditionPage'
-import SequencePage from './sequences/SequencePage'
+import GameScreen from './common/GameScreen'
+import SequenceGame from './sequences/SequenceGame'
 
 export default function App() {
-  const [mode, setMode] = useState(null)  // null | 'add' | 'sub' | 'seq'
+  const [selection, setSelection] = useState(null) // { level, category }
 
-  if (!mode) return <Home onSelect={setMode} />
-
-  if (mode === 'add') return <AdditionPage onBack={() => setMode(null)} />
-  if (mode === 'sub') return <SubtractionPage onBack={() => setMode(null)} />
-  if (mode === 'seq') return <SequencePage onBack={() => setMode(null)} />
+  return (
+    <div className="app-shell">
+      <Toolbar />
+      <div className="app-content">
+        {!selection ? (
+          <Home onSelect={setSelection} />
+        ) : selection.category === 'seq' ? (
+          <SequenceGame
+            level={selection.level}
+            onBack={() => setSelection(null)}
+          />
+        ) : (
+          <GameScreen
+            level={selection.level}
+            onBack={() => setSelection(null)}
+          />
+        )}
+      </div>
+    </div>
+  )
 }
