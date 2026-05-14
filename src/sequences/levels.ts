@@ -6,10 +6,10 @@ export const SEQ_ASK  = 4
 export const SEQ_LEVELS: SeqLevel[] = [
   {
     id: 'seqA',
-    label: 'Jono A',
-    title: 'Ykköset',
+    label: 'Vähenevä ykköset',
+    title: 'Vähenevä lukujono ykkösillä',
     desc: 'Esim. 20, 18, 16, …',
-    en: { label: 'Series A', title: 'Ones', desc: 'e.g. 20, 18, 16, …' },
+    en: { label: 'Decreasing ones', title: 'Decreasing sequence — ones', desc: 'e.g. 20, 18, 16, …' },
     icon: '🔢',
     className: 'lv1',
     generate: () => {
@@ -20,10 +20,10 @@ export const SEQ_LEVELS: SeqLevel[] = [
   },
   {
     id: 'seqB',
-    label: 'Jono B',
-    title: 'Kymmenet',
+    label: 'Vähenevä kymmenet',
+    title: 'Vähenevä lukujono kymmenillä',
     desc: 'Esim. 100, 90, 80, …',
-    en: { label: 'Series B', title: 'Tens', desc: 'e.g. 100, 90, 80, …' },
+    en: { label: 'Decreasing tens', title: 'Decreasing sequence — tens', desc: 'e.g. 100, 90, 80, …' },
     icon: '🔢🔢',
     className: 'lv2',
     generate: () => {
@@ -35,10 +35,10 @@ export const SEQ_LEVELS: SeqLevel[] = [
   },
   {
     id: 'seqC',
-    label: 'Jono C',
-    title: 'Sadat — pienet askeleet',
+    label: 'Vähenevä sadat kymmenillä',
+    title: 'Vähenevä lukujono sadoista kymmenillä',
     desc: 'Esim. 500, 470, 440, …',
-    en: { label: 'Series C', title: 'Hundreds — small steps', desc: 'e.g. 500, 470, 440, …' },
+    en: { label: 'Decreasing hundreds by tens', title: 'Decreasing sequence — hundreds by tens', desc: 'e.g. 500, 470, 440, …' },
     icon: '🔢🔢🔢',
     className: 'lv3',
     generate: () => {
@@ -51,10 +51,10 @@ export const SEQ_LEVELS: SeqLevel[] = [
   },
   {
     id: 'seqD',
-    label: 'Jono D',
-    title: 'Sadat — isot askeleet',
+    label: 'Vähenevä sadoilla',
+    title: 'Vähenevä lukujono sadoilla',
     desc: 'Esim. 900, 700, 500, …',
-    en: { label: 'Series D', title: 'Hundreds — large steps', desc: 'e.g. 900, 700, 500, …' },
+    en: { label: 'Decreasing hundreds', title: 'Decreasing sequence — hundreds', desc: 'e.g. 900, 700, 500, …' },
     icon: '🔢🔢🔢🔢',
     className: 'lv4',
     generate: () => {
@@ -66,10 +66,10 @@ export const SEQ_LEVELS: SeqLevel[] = [
   },
   {
     id: 'seqE',
-    label: 'Jono E',
-    title: 'Kasvava — ykköset',
+    label: 'Kasvava ykköset',
+    title: 'Kasvava lukujono ykkösillä',
     desc: 'Esim. 3, 6, 9, …',
-    en: { label: 'Series E', title: 'Ascending — ones', desc: 'e.g. 3, 6, 9, …' },
+    en: { label: 'Ascending ones', title: 'Ascending sequence — ones', desc: 'e.g. 3, 6, 9, …' },
     icon: '🔢',
     className: 'lv1',
     direction: 'asc',
@@ -81,10 +81,10 @@ export const SEQ_LEVELS: SeqLevel[] = [
   },
   {
     id: 'seqF',
-    label: 'Jono F',
-    title: 'Kasvava — kymmenet',
+    label: 'Kasvava kymmenet',
+    title: 'Kasvava lukujono kymmenillä',
     desc: 'Esim. 10, 30, 50, …',
-    en: { label: 'Series F', title: 'Ascending — tens', desc: 'e.g. 10, 30, 50, …' },
+    en: { label: 'Ascending tens', title: 'Ascending sequence — tens', desc: 'e.g. 10, 30, 50, …' },
     icon: '🔢🔢',
     className: 'lv2',
     direction: 'asc',
@@ -97,10 +97,10 @@ export const SEQ_LEVELS: SeqLevel[] = [
   },
   {
     id: 'seqG',
-    label: 'Jono G',
-    title: 'Kasvava — sekavaihe',
+    label: 'Kasvava vaihtelevat',
+    title: 'Kasvava lukujono vaihtelevilla askelilla',
     desc: 'Esim. 5, 20, 35, …',
-    en: { label: 'Series G', title: 'Ascending — mixed step', desc: 'e.g. 5, 20, 35, …' },
+    en: { label: 'Ascending mixed', title: 'Ascending sequence — varying steps', desc: 'e.g. 5, 20, 35, …' },
     icon: '🔢🔢🔢',
     className: 'lv3',
     direction: 'asc',
