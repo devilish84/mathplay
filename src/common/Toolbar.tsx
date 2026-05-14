@@ -32,7 +32,7 @@ export default function Toolbar({ onBack }: Props) {
               />
             </div>
             <span>
-              <strong>{game.score}</strong> / {game.question} {t('tasks')}
+              {game.question} / <strong>{game.total}</strong> {t('tasks')} · <strong>{game.score}</strong> {t('correct')}
             </span>
           </>
         ) : total > 0 ? (
