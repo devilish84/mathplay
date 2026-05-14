@@ -1,4 +1,4 @@
 export default {
-  fi: { tasks: 'tehtävää', correct: 'oikein' },
-  en: { tasks: 'tasks',    correct: 'correct' },
+  fi: { tasks: 'tehtävää', correct: 'oikein', back: '← Takaisin' },
+  en: { tasks: 'tasks',    correct: 'correct', back: '← Back' },
 }

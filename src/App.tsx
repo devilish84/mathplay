@@ -18,9 +18,11 @@ function isSeqLevel(l: AnyEnrichedLevel): l is EnrichedSeqLevel {
 export default function App() {
   const [selection, setSelection] = useState<Selection | null>(null)
 
+  const handleBack = selection ? () => setSelection(null) : undefined
+
   return (
     <div className="app-shell">
-      <Toolbar />
+      <Toolbar onBack={handleBack} />
       <div className="app-content">
         {!selection ? (
           <Home onSelect={setSelection} />

@@ -60,7 +60,6 @@ export default function GameScreen({ level, onBack }: Props) {
   return (
     <div className="game-screen">
       <div className="game-header">
-        <button className="back-btn" onClick={onBack}>{t('back')}</button>
         <span className={`level-badge ${level.className}`}>{levelLabel}</span>
       </div>
 

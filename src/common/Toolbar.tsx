@@ -5,7 +5,9 @@ import translations from './Toolbar.i18n'
 import type { RootState } from '../store'
 import type { Session } from '../types'
 
-export default function Toolbar() {
+interface Props { onBack?: () => void }
+
+export default function Toolbar({ onBack }: Props) {
   const t        = useTranslation(translations)
   const dispatch = useDispatch()
   const language = useSelector((s: RootState) => s.settings.language)
@@ -50,6 +52,10 @@ export default function Toolbar() {
           <option key={l.code} value={l.code}>{l.label}</option>
         ))}
       </select>
+
+      {onBack && (
+        <button className="back-btn" onClick={onBack}>{t('back')}</button>
+      )}
     </div>
   )
 }
