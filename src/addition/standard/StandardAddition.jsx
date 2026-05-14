@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useTranslation } from '../../i18n'
+import translations from './StandardAddition.i18n'
 
 export default function StandardAddition({ a, b, onCorrect, onWrong }) {
+  const t      = useTranslation(translations)
   const answer = a + b
-  const [value, setValue]     = useState('')
-  const [checked, setChecked] = useState(false)
+  const [value, setValue]         = useState('')
+  const [checked, setChecked]     = useState(false)
   const [isCorrect, setIsCorrect] = useState(null)
   const inputRef = useRef(null)
 
@@ -34,9 +37,7 @@ export default function StandardAddition({ a, b, onCorrect, onWrong }) {
         placeholder="?"
       />
       {!checked && (
-        <button className="check-btn" onClick={check} disabled={value === ''}>
-          Tarkista ✓
-        </button>
+        <button className="check-btn" onClick={check} disabled={value === ''}>{t('check')}</button>
       )}
     </div>
   )

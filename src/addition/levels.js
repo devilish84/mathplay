@@ -43,10 +43,10 @@ const genAdd4 = () => {
 }
 
 export const ADD_LEVELS = [
-  { id: 'a1', label: 'Taso 1', title: 'Pienet luvut', desc: 'Esim. 7 + 8', icon: '⭐', className: 'lv1', generate: genAdd1, mode: 'standard', op: 'add' },
-  { id: 'a2', label: 'Taso 2', title: 'Kymmenet — vaakasuora', desc: 'Esim. 15 + 9', icon: '⭐⭐', className: 'lv2', generate: genAdd2, mode: 'standard', op: 'add' },
-  { id: 'a3', label: 'Taso 2', title: 'Kymmenet — allekkain', desc: 'Esim. 15 + 9', icon: '⭐⭐', className: 'lv2', generate: genAdd2, mode: 'column', op: 'add' },
-  { id: 'a4', label: 'Taso 3', title: 'Kaksinumeroiset — vaakasuora', desc: 'Esim. 34 + 27', icon: '⭐⭐⭐', className: 'lv3', generate: genAdd3, mode: 'standard', op: 'add' },
-  { id: 'a5', label: 'Taso 3', title: 'Kaksinumeroiset — allekkain', desc: 'Esim. 34 + 27', icon: '⭐⭐⭐', className: 'lv3', generate: genAdd3, mode: 'column', op: 'add' },
-  { id: 'a6', label: 'Taso 4', title: 'Kolminumeroiset — allekkain', desc: 'Esim. 234 + 167', icon: '⭐⭐⭐⭐', className: 'lv4', generate: genAdd4, mode: 'column', op: 'add' },
+  { id: 'a1', label: 'Taso 1', title: 'Pienet luvut',                desc: 'Esim. 7 + 8',    en: { label: 'Level 1', title: 'Small numbers',            desc: 'e.g. 7 + 8' },    icon: '⭐',      className: 'lv1', generate: genAdd1, mode: 'standard', op: 'add' },
+  { id: 'a2', label: 'Taso 2', title: 'Kymmenet — vaakasuora',     desc: 'Esim. 15 + 9',   en: { label: 'Level 2', title: 'Tens — horizontal',        desc: 'e.g. 15 + 9' },   icon: '⭐⭐',    className: 'lv2', generate: genAdd2, mode: 'standard', op: 'add' },
+  { id: 'a3', label: 'Taso 2', title: 'Kymmenet — allekkain',      desc: 'Esim. 15 + 9',   en: { label: 'Level 2', title: 'Tens — column',            desc: 'e.g. 15 + 9' },   icon: '⭐⭐',    className: 'lv2', generate: genAdd2, mode: 'column',   op: 'add' },
+  { id: 'a4', label: 'Taso 3', title: 'Kaksinumeroiset — vaakasuora', desc: 'Esim. 34 + 27', en: { label: 'Level 3', title: 'Two digits — horizontal', desc: 'e.g. 34 + 27' }, icon: '⭐⭐⭐',  className: 'lv3', generate: genAdd3, mode: 'standard', op: 'add' },
+  { id: 'a5', label: 'Taso 3', title: 'Kaksinumeroiset — allekkain',  desc: 'Esim. 34 + 27', en: { label: 'Level 3', title: 'Two digits — column',     desc: 'e.g. 34 + 27' }, icon: '⭐⭐⭐',  className: 'lv3', generate: genAdd3, mode: 'column',   op: 'add' },
+  { id: 'a6', label: 'Taso 4', title: 'Kolminumeroiset — allekkain', desc: 'Esim. 234 + 167', en: { label: 'Level 4', title: 'Three digits — column', desc: 'e.g. 234 + 167' }, icon: '⭐⭐⭐⭐', className: 'lv4', generate: genAdd4, mode: 'column',   op: 'add' },
 ]

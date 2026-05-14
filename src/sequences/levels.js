@@ -7,6 +7,7 @@ export const SEQ_LEVELS = [
     label: 'Jono A',
     title: 'Ykköset',
     desc: 'Esim. 20, 18, 16, …',
+    en: { label: 'Series A', title: 'Ones', desc: 'e.g. 20, 18, 16, …' },
     icon: '🔢',
     className: 'lv1',
     generate: () => {
@@ -20,6 +21,7 @@ export const SEQ_LEVELS = [
     label: 'Jono B',
     title: 'Kymmenet',
     desc: 'Esim. 100, 90, 80, …',
+    en: { label: 'Series B', title: 'Tens', desc: 'e.g. 100, 90, 80, …' },
     icon: '🔢🔢',
     className: 'lv2',
     generate: () => {
@@ -34,6 +36,7 @@ export const SEQ_LEVELS = [
     label: 'Jono C',
     title: 'Sadat — pienet askeleet',
     desc: 'Esim. 500, 470, 440, …',
+    en: { label: 'Series C', title: 'Hundreds — small steps', desc: 'e.g. 500, 470, 440, …' },
     icon: '🔢🔢🔢',
     className: 'lv3',
     generate: () => {
@@ -49,6 +52,7 @@ export const SEQ_LEVELS = [
     label: 'Jono D',
     title: 'Sadat — isot askeleet',
     desc: 'Esim. 900, 700, 500, …',
+    en: { label: 'Series D', title: 'Hundreds — large steps', desc: 'e.g. 900, 700, 500, …' },
     icon: '🔢🔢🔢🔢',
     className: 'lv4',
     generate: () => {

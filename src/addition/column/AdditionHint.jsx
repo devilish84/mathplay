@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
+import { useLang } from '../../i18n'
+import i18n from './AdditionHint.i18n'
 
 export default function AdditionHint({ a, b }) {
+  const lang = useLang()
+  const s    = i18n[lang] ?? i18n.fi
+
   const [step, setStep] = useState(0)
 
   const answer  = a + b
@@ -9,12 +14,11 @@ export default function AdditionHint({ a, b }) {
   const aDigits = String(a).split('').map(Number)
   const bDigits = String(b).split('').map(Number)
   const padLeft = (arr, n) => Array(n - arr.length).fill(null).concat(arr)
-  const aCols = padLeft(aDigits, ansCols)
-  const bCols = padLeft(bDigits, ansCols)
-  const colNames = ['sadat', 'kymmenet', 'ykköset']
-  const getLabel = (i) => colNames[3 - ansCols + i] ?? ''
+  const aCols   = padLeft(aDigits, ansCols)
+  const bCols   = padLeft(bDigits, ansCols)
+  const getLabel = (i) => [s.col.hundreds, s.col.tens, s.col.ones][3 - ansCols + i] ?? ''
 
-  const sums = []
+  const sums    = []
   const carries = []
   const effSums = []
   let carry = 0
@@ -34,29 +38,25 @@ export default function AdditionHint({ a, b }) {
     const bVal = bCols[i] ?? 0
     const name = getLabel(i)
 
-    if (carryIn) {
-      steps.push({
-        col: i,
-        text: `Lasketaan ${name}: ${aVal} + ${bVal} + 1 (muistinumero) = ${effSums[i]}${carryOut ? ` → kirjoitetaan ${sums[i]}, muistinumero 1 seuraavaan` : ''}`,
-        result: Array(ansCols).fill(null).map((_, j) => j > i ? sums[j] : null),
-        carryOut,
-      })
-    } else {
-      steps.push({
-        col: i,
-        text: `Lasketaan ${name}: ${aVal} + ${bVal} = ${effSums[i]}${carryOut ? ` → kirjoitetaan ${sums[i]}, muistinumero 1 seuraavaan` : ''}`,
-        result: Array(ansCols).fill(null).map((_, j) => j > i ? sums[j] : null),
-        carryOut,
-      })
-    }
+    const base = carryIn
+      ? s.calcCarryIn(name, aVal, bVal, effSums[i])
+      : s.calc(name, aVal, bVal, effSums[i])
+    const text = carryOut ? s.withCarryOut(base, sums[i]) : base
+
+    steps.push({
+      col: i,
+      text,
+      result: Array(ansCols).fill(null).map((_, j) => j > i ? sums[j] : null),
+      carryOut,
+    })
   }
-  steps.push({ col: -1, text: `Vastaus on ${answer}! 🎉`, result: sums, done: true })
+  steps.push({ col: -1, text: s.answer(answer), result: sums, done: true })
 
   const cur = steps[Math.min(step, steps.length - 1)]
 
   return (
     <div className="hint-box">
-      <div className="hint-title">💡 Katsotaan yhdessä!</div>
+      <div className="hint-title">{s.title}</div>
       <div className="hint-visual">
         <div className="hint-col">
           <div className="hint-cell hint-cell-annotation" />
@@ -66,10 +66,10 @@ export default function AdditionHint({ a, b }) {
           <div className="hint-cell hint-cell-result" />
         </div>
         {Array.from({ length: ansCols }, (_, i) => {
-          const isActive = cur.col === i
-          const carryIn  = i < ansCols - 1 ? carries[i + 1] : 0
-          const showCarryIn = carryIn && step > steps.findIndex(s => s.col === i + 1)
-          const resVal = cur.result?.[i]
+          const isActive   = cur.col === i
+          const carryIn    = i < ansCols - 1 ? carries[i + 1] : 0
+          const showCarryIn = carryIn && step > steps.findIndex((st) => st.col === i + 1)
+          const resVal     = cur.result?.[i]
           return (
             <div key={i} className="hint-col">
               <div className="hint-cell hint-cell-annotation">
@@ -91,11 +91,11 @@ export default function AdditionHint({ a, b }) {
       </div>
       <p className="hint-text">{cur.text}</p>
       {step < steps.length - 1 ? (
-        <button className="hint-next-btn" onClick={() => setStep(s => s + 1)}>
-          Seuraava vaihe →
+        <button className="hint-next-btn" onClick={() => setStep((n) => n + 1)}>
+          {s.nextStep}
         </button>
       ) : (
-        <p className="hint-done">Hienosti! Nyt tiedät miten se tehdään! 🌟</p>
+        <p className="hint-done">{s.done}</p>
       )}
     </div>
   )

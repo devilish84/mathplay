@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useTranslation } from '../i18n'
+import translations from './SequenceGame.i18n'
 import Summary from '../common/Summary'
 import { SEQ_SHOW, SEQ_ASK } from './levels'
 
 const QUESTIONS_PER_ROUND = 10
 
 export default function SequenceGame({ level, onBack }) {
+  const t = useTranslation(translations)
+
   const [questionNum, setQuestionNum] = useState(0)
   const [score, setScore]             = useState(0)
   const [seq, setSeq]                 = useState(() => level.generate())
@@ -14,8 +18,8 @@ export default function SequenceGame({ level, onBack }) {
   const [done, setDone]               = useState(false)
   const inputRefs = useRef([])
 
-  const fullSeq    = Array.from({ length: SEQ_SHOW + SEQ_ASK }, (_, i) => seq.start - i * seq.step)
-  const givenNums  = fullSeq.slice(0, SEQ_SHOW)
+  const fullSeq     = Array.from({ length: SEQ_SHOW + SEQ_ASK }, (_, i) => seq.start - i * seq.step)
+  const givenNums   = fullSeq.slice(0, SEQ_SHOW)
   const correctNums = fullSeq.slice(SEQ_SHOW)
 
   useEffect(() => {
@@ -29,9 +33,8 @@ export default function SequenceGame({ level, onBack }) {
 
   const handleChange = (i, val) => {
     if (checked) return
-    const v = val.replace(/[^0-9]/g, '')
     const next = [...answers]
-    next[i] = v
+    next[i] = val.replace(/[^0-9]/g, '')
     setAnswers(next)
   }
 
@@ -74,9 +77,9 @@ export default function SequenceGame({ level, onBack }) {
   return (
     <div className="game-screen">
       <div className="game-header">
-        <button className="back-btn" onClick={onBack}>← Takaisin</button>
+        <button className="back-btn" onClick={onBack}>{t('back')}</button>
         <span className={`level-badge ${level.className}`}>{level.label}</span>
-        <div className="score-display">Pisteet: <span>{score}</span></div>
+        <div className="score-display">{t('points')}: <span>{score}</span></div>
       </div>
 
       <div className="progress-bar">
@@ -84,10 +87,10 @@ export default function SequenceGame({ level, onBack }) {
       </div>
 
       <div style={{ textAlign: 'center', color: '#b2bec3', marginBottom: 20, fontSize: '0.9rem' }}>
-        Kysymys {questionNum + 1} / {QUESTIONS_PER_ROUND}
+        {t('question')} {questionNum + 1} {t('of')} {QUESTIONS_PER_ROUND}
       </div>
 
-      <p className="seq-instruction">Jatka lukujonoa — mikä luku tulee seuraavaksi?</p>
+      <p className="seq-instruction">{t('instruction')}</p>
 
       <div className="seq-row">
         {givenNums.map((n, i) => (
@@ -130,29 +133,29 @@ export default function SequenceGame({ level, onBack }) {
       <div className="col-action-row" style={{ marginTop: 20 }}>
         {!checked && (
           <button className="check-btn" onClick={check} disabled={answers.some((a) => a === '')}>
-            Tarkista ✓
+            {t('check')}
           </button>
         )}
         {!showStep && (
           <button className="hint-show-btn" onClick={() => setShowStep(true)}>
-            💡 Mikä vähennetään?
+            {t('showStep')}
           </button>
         )}
       </div>
 
       {showStep && (
         <div className="seq-step-reveal">
-          Joka kerta vähennetään <strong>{seq.step}</strong>
+          {t('stepReveal', { step: seq.step })}
         </div>
       )}
 
       {checked && (
         <div style={{ textAlign: 'center', marginTop: 16 }}>
           <div className={`feedback ${allCorrect ? 'correct' : 'wrong'}`}>
-            {allCorrect ? '🎉 Oikein! Loistavaa!' : `😅 Ei ihan! Oikeat luvut näkyvät yläpuolella.`}
+            {allCorrect ? t('correct') : t('wrong')}
           </div>
           <button className="next-btn" onClick={next}>
-            {questionNum + 1 < QUESTIONS_PER_ROUND ? 'Seuraava →' : 'Näytä tulos'}
+            {questionNum + 1 < QUESTIONS_PER_ROUND ? t('next') : t('showResult')}
           </button>
         </div>
       )}
