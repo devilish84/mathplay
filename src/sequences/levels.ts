@@ -64,4 +64,51 @@ export const SEQ_LEVELS: SeqLevel[] = [
       return { start, step }
     },
   },
+  {
+    id: 'seqE',
+    label: 'Jono E',
+    title: 'Kasvava — ykköset',
+    desc: 'Esim. 3, 6, 9, …',
+    en: { label: 'Series E', title: 'Ascending — ones', desc: 'e.g. 3, 6, 9, …' },
+    icon: '🔢',
+    className: 'lv1',
+    direction: 'asc',
+    generate: () => {
+      const step  = Math.floor(Math.random() * 5) + 1
+      const start = Math.floor(Math.random() * 10) + 1
+      return { start, step }
+    },
+  },
+  {
+    id: 'seqF',
+    label: 'Jono F',
+    title: 'Kasvava — kymmenet',
+    desc: 'Esim. 10, 30, 50, …',
+    en: { label: 'Series F', title: 'Ascending — tens', desc: 'e.g. 10, 30, 50, …' },
+    icon: '🔢🔢',
+    className: 'lv2',
+    direction: 'asc',
+    generate: () => {
+      const steps = [10, 20, 30]
+      const step  = steps[Math.floor(Math.random() * steps.length)]
+      const start = step * (Math.floor(Math.random() * 5) + 1)
+      return { start, step }
+    },
+  },
+  {
+    id: 'seqG',
+    label: 'Jono G',
+    title: 'Kasvava — sekavaihe',
+    desc: 'Esim. 5, 20, 35, …',
+    en: { label: 'Series G', title: 'Ascending — mixed step', desc: 'e.g. 5, 20, 35, …' },
+    icon: '🔢🔢🔢',
+    className: 'lv3',
+    direction: 'asc',
+    generate: () => {
+      const steps = [15, 25]
+      const step  = steps[Math.floor(Math.random() * steps.length)]
+      const start = Math.floor(Math.random() * 20) + 5
+      return { start, step }
+    },
+  },
 ]

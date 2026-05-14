@@ -25,6 +25,7 @@ export interface SeqLevel {
   en?: LevelLocale
   icon: string
   className: string
+  direction?: 'asc' | 'desc'
   generate: () => { start: number; step: number }
 }
 

@@ -23,7 +23,8 @@ export default function SequenceGame({ level, onBack }: Props) {
   const [done, setDone]               = useState(false)
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
-  const fullSeq     = Array.from({ length: SEQ_SHOW + SEQ_ASK }, (_, i) => seq.start - i * seq.step)
+  const asc         = level.direction === 'asc'
+  const fullSeq     = Array.from({ length: SEQ_SHOW + SEQ_ASK }, (_, i) => asc ? seq.start + i * seq.step : seq.start - i * seq.step)
   const givenNums   = fullSeq.slice(0, SEQ_SHOW)
   const correctNums = fullSeq.slice(SEQ_SHOW)
 
@@ -133,12 +134,12 @@ export default function SequenceGame({ level, onBack }: Props) {
           <button className="check-btn" onClick={check} disabled={answers.some((a) => a === '')}>{t('check')}</button>
         )}
         {!showStep && (
-          <button className="hint-show-btn" onClick={() => setShowStep(true)}>{t('showStep')}</button>
+          <button className="hint-show-btn" onClick={() => setShowStep(true)}>{t(asc ? 'showStepAsc' : 'showStepDesc')}</button>
         )}
       </div>
 
       {showStep && (
-        <div className="seq-step-reveal">{t('stepReveal', { step: seq.step })}</div>
+        <div className="seq-step-reveal">{t(asc ? 'stepRevealAsc' : 'stepRevealDesc', { step: seq.step })}</div>
       )}
 
       {checked && (
