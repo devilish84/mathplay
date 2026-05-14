@@ -5,3 +5,7 @@ dist/
 
 # Terraform — keep local only
 automation/
+
+# Playwright
+playwright-report/
+test-results/
