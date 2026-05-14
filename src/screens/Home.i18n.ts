@@ -5,6 +5,7 @@ export default {
     categories: {
       sub: 'Vähennyslaskut',
       add: 'Yhteenlaskut',
+      mul: 'Kertolaskut',
       seq: 'Lukujonot',
     },
   },
@@ -14,6 +15,7 @@ export default {
     categories: {
       sub: 'Subtraction',
       add: 'Addition',
+      mul: 'Multiplication',
       seq: 'Number Sequences',
     },
   },

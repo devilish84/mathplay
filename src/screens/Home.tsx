@@ -8,6 +8,7 @@ interface Selection { level: AnyEnrichedLevel; category: string }
 const CATEGORIES = [
   { id: 'sub', icon: '➖' },
   { id: 'add', icon: '➕' },
+  { id: 'mul', icon: '✖️' },
   { id: 'seq', icon: '🔢' },
 ] as const
 
