@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useTranslation } from '../../i18n'
+import translations from './ColumnAddition.i18n'
 import AdditionHint from './AdditionHint'
 
 export default function ColumnAddition({ a, b, onCorrect, onWrong }) {
+  const t       = useTranslation(translations)
   const answer  = a + b
   const ansStr  = String(answer)
   const ansCols = ansStr.length
@@ -71,7 +74,7 @@ export default function ColumnAddition({ a, b, onCorrect, onWrong }) {
   const isCorrect = checked && digits.join('') === ansStr
   const isWrong   = checked && !isCorrect
 
-  const getLabel = (i) => ['sadat', 'kymmenet', 'ykköset'][3 - ansCols + i] ?? ''
+  const getLabel = (i) => [t('hundreds'), t('tens'), t('ones')][3 - ansCols + i] ?? ''
 
   return (
     <div className="column-subtraction">
@@ -106,7 +109,7 @@ export default function ColumnAddition({ a, b, onCorrect, onWrong }) {
                   onChange={(e) => handleCarry(i, e.target.value)}
                   disabled={checked}
                   placeholder=""
-                  title="Muistinumero"
+                  title={t('carry')}
                 />
               )}
             </div>
@@ -150,19 +153,19 @@ export default function ColumnAddition({ a, b, onCorrect, onWrong }) {
 
       {!checked && (
         <p className="borrow-hint-tip">
-          Aloita ykköisistä! · Ylittyykö 10? Kirjoita muistinumero 1 yläpuolelle ☝️
+          {t('startOnes')} · {t('carryTip')}
         </p>
       )}
 
       <div className="col-action-row" style={{ marginTop: 12 }}>
         {!checked && (
           <button className="check-btn" onClick={check} disabled={digits.join('').length < ansCols}>
-            Tarkista ✓
+            {t('check')}
           </button>
         )}
         {!showHint && (
           <button className="hint-show-btn" onClick={() => setShowHint(true)}>
-            💡 Vihje
+            {t('hint')}
           </button>
         )}
       </div>

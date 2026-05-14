@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useTranslation } from '../../i18n'
+import translations from './ColumnSubtraction.i18n'
 import BorrowingHint from './BorrowingHint'
 
 export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
+  const t      = useTranslation(translations)
   const answer = a - b
   const ansStr = String(answer)
   const aDigits = String(a).split('').map(Number)
@@ -13,7 +16,7 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
   const bCols = padLeft(bDigits)
 
   const [borrows, setBorrows] = useState(Array(cols).fill(false))
-  const [digits, setDigits] = useState(Array(ansStr.length).fill(''))
+  const [digits, setDigits]   = useState(Array(ansStr.length).fill(''))
   const [checked, setChecked] = useState(false)
   const [showHint, setShowHint] = useState(false)
   const inputRefs = useRef([])
@@ -29,11 +32,7 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
   const toggleBorrow = (colIdx) => {
     if (checked) return
     if (aCols[colIdx] === null || aCols[colIdx] === 0) return
-    setBorrows((prev) => {
-      const next = [...prev]
-      next[colIdx] = !next[colIdx]
-      return next
-    })
+    setBorrows((prev) => { const next = [...prev]; next[colIdx] = !next[colIdx]; return next })
   }
 
   const effectiveA = aCols.map((d, i) => {
@@ -47,9 +46,7 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
   const handleDigit = (i, val) => {
     if (checked) return
     const v = val.replace(/\D/g, '').slice(-1)
-    const next = [...digits]
-    next[i] = v
-    setDigits(next)
+    const next = [...digits]; next[i] = v; setDigits(next)
     if (v && i > 0) inputRefs.current[i - 1]?.focus()
   }
 
@@ -62,17 +59,13 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
     if (checked || digits.join('').length < ansStr.length) return
     const correct = digits.join('') === ansStr
     setChecked(true)
-    if (correct) onCorrect()
-    else onWrong(answer)
+    if (correct) onCorrect(); else onWrong(answer)
   }
 
-  const isCorrect = checked && digits.join('') === ansStr
-  const isWrong = checked && !isCorrect
-
-  const answerOffset = cols - ansStr.length
-
-  const colLabels = ['sadat', 'kymmenet', 'ykköset']
-  const getLabel = (i) => colLabels[cols - 1 - i] ?? ''
+  const isCorrect     = checked && digits.join('') === ansStr
+  const answerOffset  = cols - ansStr.length
+  const colLabels     = [t('hundreds'), t('tens'), t('ones')]
+  const getLabel      = (i) => colLabels[cols - 1 - i] ?? ''
 
   return (
     <div className="column-subtraction">
@@ -89,35 +82,27 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
 
         <div className="column-row borrow-annotation-row">
           <div className="col-digit col-sign-placeholder" />
-          {aCols.map((d, i) => {
-            const givingBorrow = borrows[i]
-            const receivingBorrow = i > 0 && borrows[i - 1]
-            return (
-              <div key={i} className="col-digit borrow-annotation-cell">
-                {givingBorrow && (
-                  <span className="borrow-strikethrough">{d}</span>
-                )}
-                {receivingBorrow && (
-                  <span className="borrow-plus10">+10</span>
-                )}
-              </div>
-            )
-          })}
+          {aCols.map((d, i) => (
+            <div key={i} className="col-digit borrow-annotation-cell">
+              {borrows[i]      && <span className="borrow-strikethrough">{d}</span>}
+              {i > 0 && borrows[i - 1] && <span className="borrow-plus10">+10</span>}
+            </div>
+          ))}
         </div>
 
         <div className="column-row">
           <div className="col-digit col-sign-placeholder" />
           {aCols.map((d, i) => {
-            const canBorrow = effectiveA[i] !== null && effectiveA[i] > 0 && i < cols - 1 && !checked
-            const gives = borrows[i]
-            const receives = i > 0 && borrows[i - 1]
+            const canBorrow  = effectiveA[i] !== null && effectiveA[i] > 0 && i < cols - 1 && !checked
+            const gives      = borrows[i]
+            const receives   = i > 0 && borrows[i - 1]
             const isModified = gives || receives
             return (
               <div
                 key={i}
                 className={`col-digit${canBorrow ? ' borrow-clickable' : ''}${gives ? ' is-borrowed' : ''}${receives && !gives ? ' is-received' : ''}`}
                 onClick={() => canBorrow && toggleBorrow(i)}
-                title={canBorrow ? 'Klikkaa lainataksesi tästä' : undefined}
+                title={canBorrow ? t('clickToBorrow') : undefined}
               >
                 {d === null ? '' : isModified
                   ? <span className={gives ? 'borrowed-reduced' : 'borrowed-received'}>{effectiveA[i]}</span>
@@ -160,24 +145,19 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
 
       {!checked && (
         <p className="borrow-hint-tip">
-          Aloita ykköisistä! · Tarvitsetko lainausta? Klikkaa ylärivin numeroa 👆
+          {t('startOnes')} · {t('borrowTip')}
         </p>
       )}
 
       <div className="col-action-row">
         {!checked && (
-          <button
-            className="check-btn"
-            onClick={check}
-            disabled={digits.join('').length < ansStr.length}
-          >
-            Tarkista ✓
+          <button className="check-btn" onClick={check} disabled={digits.join('').length < ansStr.length}>
+            {t('check')}
           </button>
         )}
-
         {!showHint && (
           <button className="hint-show-btn" onClick={() => setShowHint(true)}>
-            💡 Vihje
+            {t('hint')}
           </button>
         )}
       </div>

@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { useTranslation, useLang } from '../i18n'
+import translations from './Home.i18n'
 import { ALL_LEVELS } from '../levels'
 
 const CATEGORIES = [
-  { id: 'sub', label: 'Vähennyslaskut', icon: '➖' },
-  { id: 'add', label: 'Yhteenlaskut',   icon: '➕' },
-  { id: 'seq', label: 'Lukujonot',      icon: '🔢' },
+  { id: 'sub', icon: '➖' },
+  { id: 'add', icon: '➕' },
+  { id: 'seq', icon: '🔢' },
 ]
 
 const STAR_OPTIONS = [1, 2, 3, 4]
@@ -14,6 +16,9 @@ function StarRow({ count }) {
 }
 
 export default function Home({ onSelect }) {
+  const t    = useTranslation(translations)
+  const lang = useLang()
+
   const [filterCat,   setFilterCat]   = useState(null)
   const [filterStars, setFilterStars] = useState(null)
 
@@ -31,13 +36,14 @@ export default function Home({ onSelect }) {
     setFilterStars((prev) => (prev === n ? null : n))
   }
 
+  const activeCat = filterCat ? CATEGORIES.find((c) => c.id === filterCat) : null
+
   return (
     <div className="home-screen">
       <h1 className="home-title">
-        {filterCat
-          ? CATEGORIES.find((c) => c.id === filterCat)?.icon + ' ' +
-            CATEGORIES.find((c) => c.id === filterCat)?.label
-          : '📚 Kaikki tehtävät'}
+        {activeCat
+          ? `${activeCat.icon} ${t(`categories.${filterCat}`)}`
+          : t('allTasks')}
       </h1>
 
       <div className="filter-bar">
@@ -48,7 +54,7 @@ export default function Home({ onSelect }) {
               className={`filter-chip${filterCat === c.id ? ' active' : ''}`}
               onClick={() => toggleCat(c.id)}
             >
-              {c.icon} {c.label}
+              {c.icon} {t(`categories.${c.id}`)}
             </button>
           ))}
         </div>
@@ -69,23 +75,26 @@ export default function Home({ onSelect }) {
       </div>
 
       {visible.length === 0 ? (
-        <p className="home-empty">Ei tehtäviä valituilla suodattimilla.</p>
+        <p className="home-empty">{t('empty')}</p>
       ) : (
         <div className="task-grid">
-          {visible.map((level) => (
-            <button
-              key={level.id}
-              className={`task-card cat-${level.category}`}
-              onClick={() => onSelect({ level, category: level.category })}
-            >
-              <span className="task-cat-label">
-                {level.categoryIcon} {level.categoryLabel}
-              </span>
-              <span className="task-title">{level.title}</span>
-              <span className="task-desc">{level.desc}</span>
-              <StarRow count={level.stars} />
-            </button>
-          ))}
+          {visible.map((level) => {
+            const loc = lang === 'en' && level.en ? level.en : level
+            return (
+              <button
+                key={level.id}
+                className={`task-card cat-${level.category}`}
+                onClick={() => onSelect({ level, category: level.category })}
+              >
+                <span className="task-cat-label">
+                  {level.categoryIcon} {t(`categories.${level.category}`)}
+                </span>
+                <span className="task-title">{loc.title}</span>
+                <span className="task-desc">{loc.desc}</span>
+                <StarRow count={level.stars} />
+              </button>
+            )
+          })}
         </div>
       )}
     </div>

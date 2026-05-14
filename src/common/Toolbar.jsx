@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { setLanguage } from '../store/settingsSlice'
-import { LANGUAGES } from '../i18n'
+import { useTranslation, LANGUAGES } from '../i18n'
+import translations from './Toolbar.i18n'
 
 export default function Toolbar() {
-  const dispatch  = useDispatch()
-  const language  = useSelector((s) => s.settings.language)
-  const sessions  = useSelector((s) => s.progress.sessions)
+  const t        = useTranslation(translations)
+  const dispatch = useDispatch()
+  const language = useSelector((s) => s.settings.language)
+  const sessions = useSelector((s) => s.progress.sessions)
 
   const total   = sessions.reduce((sum, s) => sum + s.total, 0)
   const correct = sessions.reduce((sum, s) => sum + s.score, 0)
@@ -18,8 +20,8 @@ export default function Toolbar() {
       <div className="toolbar-progress">
         {total > 0 && (
           <span>
-            <strong>{total}</strong> tehtävää
-            {pct !== null && <> · <strong>{pct}%</strong> oikein</>}
+            <strong>{total}</strong> {t('tasks')}
+            {pct !== null && <> · <strong>{pct}%</strong> {t('correct')}</>}
           </span>
         )}
       </div>
