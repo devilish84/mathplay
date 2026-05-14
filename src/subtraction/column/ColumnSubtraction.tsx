@@ -121,7 +121,7 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
         <div className="column-row">
           <div className="col-digit col-sign-placeholder" />
           {aCols.map((d, i) => {
-            const canBorrow  = effectiveA[i] !== null && effectiveA[i]! > 0 && i < cols - 1 && !checked
+            const canBorrow  = effectiveA[i] !== null && i < cols - 1 && !checked && (effectiveA[i]! > 0 || borrows[i])
             const gives      = borrows[i]
             const receives   = i > 0 && borrows[i - 1]
             const isModified = gives || receives
