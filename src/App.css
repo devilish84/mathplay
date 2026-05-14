@@ -361,6 +361,31 @@ body {
   font-weight: 700;
 }
 
+.borrow-sum-prompt {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0984e3;
+}
+
+.borrow-sum-label {
+  white-space: nowrap;
+}
+
+.borrow-sum-input {
+  width: 32px;
+  border: 2px solid #0984e3;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0984e3;
+  padding: 1px 2px;
+  outline: none;
+}
+
 .borrow-hint-tip {
   text-align: center;
   color: #b2bec3;

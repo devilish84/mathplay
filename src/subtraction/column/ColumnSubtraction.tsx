@@ -17,15 +17,18 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
   const aCols   = padLeft(aDigits)
   const bCols   = padLeft(bDigits)
 
-  const [borrows, setBorrows] = useState<boolean[]>(() => Array(cols).fill(false))
-  const [digits, setDigits]   = useState<string[]>(() => Array(ansStr.length).fill(''))
-  const [checked, setChecked] = useState(false)
-  const [showHint, setShowHint] = useState(false)
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([])
+  const [borrows, setBorrows]       = useState<boolean[]>(() => Array(cols).fill(false))
+  const [borrowSums, setBorrowSums] = useState<Record<number, string>>({})
+  const [digits, setDigits]         = useState<string[]>(() => Array(ansStr.length).fill(''))
+  const [checked, setChecked]       = useState(false)
+  const [showHint, setShowHint]     = useState(false)
+  const inputRefs    = useRef<(HTMLInputElement | null)[]>([])
+  const borrowRefs   = useRef<Record<number, HTMLInputElement | null>>({})
 
   useEffect(() => {
     setDigits(Array(ansStr.length).fill(''))
     setBorrows(Array(cols).fill(false))
+    setBorrowSums({})
     setChecked(false)
     setShowHint(false)
     setTimeout(() => inputRefs.current[ansStr.length - 1]?.focus(), 50)
@@ -34,7 +37,18 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
   const toggleBorrow = (colIdx: number) => {
     if (checked) return
     if (aCols[colIdx] === null || aCols[colIdx] === 0) return
+    const receivingCol = colIdx + 1
     setBorrows((prev) => { const next = [...prev]; next[colIdx] = !next[colIdx]; return next })
+    setBorrowSums((prev) => {
+      const next = { ...prev }
+      if (!borrows[colIdx]) {
+        next[receivingCol] = ''
+        setTimeout(() => borrowRefs.current[receivingCol]?.focus(), 30)
+      } else {
+        delete next[receivingCol]
+      }
+      return next
+    })
   }
 
   const effectiveA = aCols.map((d, i) => {
@@ -44,6 +58,13 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
     if (i > 0 && borrows[i - 1]) val += 10
     return val
   })
+
+  const borrowSumCorrect = (i: number) =>
+    parseInt(borrowSums[i] ?? '', 10) === (aCols[i] ?? 0) + 10
+
+  const allBorrowSumsOk = aCols.every((_, i) =>
+    !(i > 0 && borrows[i - 1]) || borrowSumCorrect(i)
+  )
 
   const handleDigit = (i: number, val: string) => {
     if (checked) return
@@ -105,9 +126,30 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
                 onClick={() => canBorrow && toggleBorrow(i)}
                 title={canBorrow ? t('clickToBorrow') : undefined}
               >
-                {d === null ? '' : isModified
-                  ? <span className={gives ? 'borrowed-reduced' : 'borrowed-received'}>{effectiveA[i]}</span>
-                  : d}
+                {d === null ? '' : receives && i in borrowSums ? (
+                  borrowSumCorrect(i) ? (
+                    <span className="borrowed-received">{effectiveA[i]}</span>
+                  ) : (
+                    <span className="borrow-sum-prompt">
+                      <span className="borrow-sum-label">{d}+10=</span>
+                      <input
+                        ref={(el) => { borrowRefs.current[i] = el }}
+                        className="borrow-sum-input"
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={2}
+                        value={borrowSums[i]}
+                        onClick={(e) => e.stopPropagation()}
+                        onChange={(e) => {
+                          const v = e.target.value.replace(/\D/g, '')
+                          setBorrowSums((prev) => ({ ...prev, [i]: v }))
+                        }}
+                      />
+                    </span>
+                  )
+                ) : isModified ? (
+                  <span className={gives ? 'borrowed-reduced' : 'borrowed-received'}>{effectiveA[i]}</span>
+                ) : d}
               </div>
             )
           })}
@@ -150,7 +192,7 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
 
       <div className="col-action-row">
         {!checked && (
-          <button className="check-btn" onClick={check} disabled={digits.join('').length < ansStr.length}>
+          <button className="check-btn" onClick={check} disabled={digits.join('').length < ansStr.length || !allBorrowSumsOk}>
             {t('check')}
           </button>
         )}
