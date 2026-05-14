@@ -1,7 +1,9 @@
+import type { SeqLevel } from '../types'
+
 export const SEQ_SHOW = 3
 export const SEQ_ASK  = 4
 
-export const SEQ_LEVELS = [
+export const SEQ_LEVELS: SeqLevel[] = [
   {
     id: 'seqA',
     label: 'Jono A',

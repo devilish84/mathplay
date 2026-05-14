@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { LEVELS } from './levels'
 import LevelSelect from '../common/LevelSelect'
 import GameScreen from '../common/GameScreen'
+import type { Level } from '../types'
 
-export default function SubtractionPage({ onBack }) {
-  const [level, setLevel] = useState(null)
+interface Props { onBack: () => void }
+
+export default function SubtractionPage({ onBack }: Props) {
+  const [level, setLevel] = useState<Level | null>(null)
 
   if (!level) {
     return (
@@ -12,7 +15,7 @@ export default function SubtractionPage({ onBack }) {
         levels={LEVELS}
         title="➖ Vähennyslaskut"
         subtitle="Valitse taso"
-        onSelect={setLevel}
+        onSelect={(lv) => setLevel(lv as any)}
         onBack={onBack}
       />
     )

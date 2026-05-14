@@ -1,6 +1,16 @@
-import React from 'react'
+import type { Level, SeqLevel } from '../types'
 
-export default function LevelSelect({ levels, title, subtitle, onSelect, onBack }) {
+type AnyLevel = Level | SeqLevel
+
+interface Props {
+  levels: AnyLevel[]
+  title: string
+  subtitle: string
+  onSelect: (lv: AnyLevel) => void
+  onBack?: () => void
+}
+
+export default function LevelSelect({ levels, title, subtitle, onSelect, onBack }: Props) {
   return (
     <div className="level-select">
       {onBack && <button className="back-btn" style={{ marginBottom: 16 }} onClick={onBack}>← Takaisin</button>}

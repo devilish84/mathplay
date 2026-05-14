@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { SEQ_LEVELS } from './levels'
 import LevelSelect from '../common/LevelSelect'
 import SequenceGame from './SequenceGame'
+import type { SeqLevel } from '../types'
 
-export default function SequencePage({ onBack }) {
-  const [level, setLevel] = useState(null)
+interface Props { onBack: () => void }
+
+export default function SequencePage({ onBack }: Props) {
+  const [level, setLevel] = useState<SeqLevel | null>(null)
 
   if (!level) {
     return (
@@ -12,7 +15,7 @@ export default function SequencePage({ onBack }) {
         levels={SEQ_LEVELS}
         title="🔢 Lukujonot"
         subtitle="Valitse taso"
-        onSelect={setLevel}
+        onSelect={(lv) => setLevel(lv as any)}
         onBack={onBack}
       />
     )

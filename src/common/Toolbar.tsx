@@ -2,15 +2,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setLanguage } from '../store/settingsSlice'
 import { useTranslation, LANGUAGES } from '../i18n'
 import translations from './Toolbar.i18n'
+import type { RootState } from '../store'
+import type { Session } from '../types'
 
 export default function Toolbar() {
   const t        = useTranslation(translations)
   const dispatch = useDispatch()
-  const language = useSelector((s) => s.settings.language)
-  const sessions = useSelector((s) => s.progress.sessions)
+  const language = useSelector((s: RootState) => s.settings.language)
+  const sessions = useSelector((s: RootState) => s.progress.sessions)
 
-  const total   = sessions.reduce((sum, s) => sum + s.total, 0)
-  const correct = sessions.reduce((sum, s) => sum + s.score, 0)
+  const total   = sessions.reduce((sum: number, s: Session) => sum + s.total, 0)
+  const correct = sessions.reduce((sum: number, s: Session) => sum + s.score, 0)
   const pct     = total > 0 ? Math.round((correct / total) * 100) : null
 
   return (

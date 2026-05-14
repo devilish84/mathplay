@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from '../../i18n'
 import translations from './ColumnAddition.i18n'
 import AdditionHint from './AdditionHint'
 
-export default function ColumnAddition({ a, b, onCorrect, onWrong }) {
+interface Props { a: number; b: number; onCorrect: () => void; onWrong: (answer: number) => void }
+
+export default function ColumnAddition({ a, b, onCorrect, onWrong }: Props) {
   const t       = useTranslation(translations)
   const answer  = a + b
   const ansStr  = String(answer)
@@ -11,12 +13,13 @@ export default function ColumnAddition({ a, b, onCorrect, onWrong }) {
   const aDigits = String(a).split('').map(Number)
   const bDigits = String(b).split('').map(Number)
 
-  const padLeft = (arr, n) => Array(n - arr.length).fill(null).concat(arr)
+  const padLeft = (arr: number[], n: number): (number | null)[] =>
+    Array<number | null>(n - arr.length).fill(null).concat(arr)
   const aCols = padLeft(aDigits, ansCols)
   const bCols = padLeft(bDigits, ansCols)
 
   const correctCarries = (() => {
-    const c = Array(ansCols).fill(0)
+    const c: number[] = Array(ansCols).fill(0)
     let carry = 0
     for (let i = ansCols - 1; i >= 0; i--) {
       const sum = (aCols[i] ?? 0) + (bCols[i] ?? 0) + carry
@@ -26,12 +29,12 @@ export default function ColumnAddition({ a, b, onCorrect, onWrong }) {
     return c
   })()
 
-  const [carries, setCarries]   = useState(Array(ansCols).fill(''))
-  const [digits, setDigits]     = useState(Array(ansCols).fill(''))
+  const [carries, setCarries]   = useState<string[]>(() => Array(ansCols).fill(''))
+  const [digits, setDigits]     = useState<string[]>(() => Array(ansCols).fill(''))
   const [checked, setChecked]   = useState(false)
   const [showHint, setShowHint] = useState(false)
-  const inputRefs = useRef([])
-  const carryRefs = useRef([])
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([])
+  const carryRefs = useRef<(HTMLInputElement | null)[]>([])
 
   useEffect(() => {
     setCarries(Array(ansCols).fill(''))
@@ -41,24 +44,20 @@ export default function ColumnAddition({ a, b, onCorrect, onWrong }) {
     setTimeout(() => inputRefs.current[ansCols - 1]?.focus(), 50)
   }, [a, b])
 
-  const handleCarry = (i, val) => {
+  const handleCarry = (i: number, val: string) => {
     if (checked) return
     const v = val.replace(/[^01]/g, '').slice(-1)
-    const next = [...carries]
-    next[i] = v
-    setCarries(next)
+    const next = [...carries]; next[i] = v; setCarries(next)
   }
 
-  const handleDigit = (i, val) => {
+  const handleDigit = (i: number, val: string) => {
     if (checked) return
     const v = val.replace(/\D/g, '').slice(-1)
-    const next = [...digits]
-    next[i] = v
-    setDigits(next)
+    const next = [...digits]; next[i] = v; setDigits(next)
     if (v && i > 0) inputRefs.current[i - 1]?.focus()
   }
 
-  const handleKey = (i, e) => {
+  const handleKey = (i: number, e: React.KeyboardEvent) => {
     if (e.key === 'Backspace' && !digits[i] && i < ansCols - 1) inputRefs.current[i + 1]?.focus()
     if (e.key === 'Enter') check()
   }
@@ -67,19 +66,15 @@ export default function ColumnAddition({ a, b, onCorrect, onWrong }) {
     if (checked || digits.join('').length < ansCols) return
     const correct = digits.join('') === ansStr
     setChecked(true)
-    if (correct) onCorrect()
-    else onWrong(answer)
+    if (correct) onCorrect(); else onWrong(answer)
   }
 
   const isCorrect = checked && digits.join('') === ansStr
-  const isWrong   = checked && !isCorrect
-
-  const getLabel = (i) => [t('hundreds'), t('tens'), t('ones')][3 - ansCols + i] ?? ''
+  const getLabel  = (i: number) => [t('hundreds'), t('tens'), t('ones')][3 - ansCols + i] ?? ''
 
   return (
     <div className="column-subtraction">
       <div className="column-numbers">
-
         {!checked && (
           <div className="column-row col-label-row">
             <div className="col-digit col-sign-placeholder" />
@@ -95,7 +90,7 @@ export default function ColumnAddition({ a, b, onCorrect, onWrong }) {
             <div key={i} className="col-digit carry-input-cell">
               {i < ansCols - 1 && (
                 <input
-                  ref={(el) => (carryRefs.current[i] = el)}
+                  ref={(el) => { carryRefs.current[i] = el }}
                   className={`carry-box-input${
                     checked
                       ? correctCarries[i] === 1
@@ -137,7 +132,7 @@ export default function ColumnAddition({ a, b, onCorrect, onWrong }) {
           {Array.from({ length: ansCols }, (_, i) => (
             <input
               key={i}
-              ref={(el) => (inputRefs.current[i] = el)}
+              ref={(el) => { inputRefs.current[i] = el }}
               className={`col-input ${checked ? (isCorrect ? 'correct' : 'wrong') : ''}`}
               type="text"
               inputMode="numeric"
@@ -152,9 +147,7 @@ export default function ColumnAddition({ a, b, onCorrect, onWrong }) {
       </div>
 
       {!checked && (
-        <p className="borrow-hint-tip">
-          {t('startOnes')} · {t('carryTip')}
-        </p>
+        <p className="borrow-hint-tip">{t('startOnes')} · {t('carryTip')}</p>
       )}
 
       <div className="col-action-row" style={{ marginTop: 12 }}>
@@ -164,9 +157,7 @@ export default function ColumnAddition({ a, b, onCorrect, onWrong }) {
           </button>
         )}
         {!showHint && (
-          <button className="hint-show-btn" onClick={() => setShowHint(true)}>
-            {t('hint')}
-          </button>
+          <button className="hint-show-btn" onClick={() => setShowHint(true)}>{t('hint')}</button>
         )}
       </div>
 

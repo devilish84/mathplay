@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from '../i18n'
 import translations from './GameScreen.i18n'
 import Summary from './Summary'
@@ -6,16 +6,20 @@ import ColumnSubtraction from '../subtraction/column/ColumnSubtraction'
 import StandardQuestion from '../subtraction/standard/StandardQuestion'
 import ColumnAddition from '../addition/column/ColumnAddition'
 import StandardAddition from '../addition/standard/StandardAddition'
+import type { Level } from '../types'
 
 const QUESTIONS_PER_ROUND = 10
 
-export default function GameScreen({ level, onBack }) {
+interface Feedback { correct: boolean; correctAnswer?: number }
+interface Props { level: Level; onBack: () => void }
+
+export default function GameScreen({ level, onBack }: Props) {
   const t = useTranslation(translations)
 
   const [questionNum, setQuestionNum] = useState(0)
   const [score, setScore]             = useState(0)
   const [question, setQuestion]       = useState(() => level.generate())
-  const [feedback, setFeedback]       = useState(null)
+  const [feedback, setFeedback]       = useState<Feedback | null>(null)
   const [done, setDone]               = useState(false)
 
   const newQuestion = () => {
@@ -27,7 +31,7 @@ export default function GameScreen({ level, onBack }) {
   }
 
   const handleCorrect = () => { setScore((s) => s + 1); setFeedback({ correct: true }) }
-  const handleWrong   = (correctAnswer) => setFeedback({ correct: false, correctAnswer })
+  const handleWrong   = (correctAnswer: number) => setFeedback({ correct: false, correctAnswer })
 
   if (done) {
     return (
@@ -36,7 +40,6 @@ export default function GameScreen({ level, onBack }) {
         total={QUESTIONS_PER_ROUND}
         onRetry={() => { setQuestionNum(0); setScore(0); setQuestion(level.generate()); setFeedback(null); setDone(false) }}
         onBack={onBack}
-        level={level}
       />
     )
   }
@@ -78,7 +81,6 @@ export default function GameScreen({ level, onBack }) {
           key={`${question.a}-${question.b}-${questionNum}`}
           a={question.a} b={question.b}
           onCorrect={handleCorrect} onWrong={handleWrong}
-          answered={!!feedback}
         />
       ) : (
         <StandardQuestion
@@ -93,7 +95,7 @@ export default function GameScreen({ level, onBack }) {
           <div className={`feedback ${feedback.correct ? 'correct' : 'wrong'}`}>
             {feedback.correct
               ? t('correct')
-              : t('wrong', { answer: feedback.correctAnswer })}
+              : t('wrong', { answer: feedback.correctAnswer ?? '' })}
           </div>
           <button className="next-btn" onClick={newQuestion}>
             {questionNum + 1 < QUESTIONS_PER_ROUND ? t('next') : t('showResult')}

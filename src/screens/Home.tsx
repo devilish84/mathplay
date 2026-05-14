@@ -1,26 +1,31 @@
 import { useState } from 'react'
 import { useTranslation, useLang } from '../i18n'
 import translations from './Home.i18n'
-import { ALL_LEVELS } from '../levels'
+import { ALL_LEVELS, type AnyEnrichedLevel } from '../levels'
+
+interface Selection { level: AnyEnrichedLevel; category: string }
 
 const CATEGORIES = [
   { id: 'sub', icon: '➖' },
   { id: 'add', icon: '➕' },
   { id: 'seq', icon: '🔢' },
-]
+] as const
 
-const STAR_OPTIONS = [1, 2, 3, 4]
+type CategoryId = typeof CATEGORIES[number]['id']
+const STAR_OPTIONS = [1, 2, 3, 4] as const
 
-function StarRow({ count }) {
+function StarRow({ count }: { count: number }) {
   return <span className="task-stars">{'⭐'.repeat(count)}</span>
 }
 
-export default function Home({ onSelect }) {
+interface Props { onSelect: (s: Selection) => void }
+
+export default function Home({ onSelect }: Props) {
   const t    = useTranslation(translations)
   const lang = useLang()
 
-  const [filterCat,   setFilterCat]   = useState(null)
-  const [filterStars, setFilterStars] = useState(null)
+  const [filterCat,   setFilterCat]   = useState<CategoryId | null>(null)
+  const [filterStars, setFilterStars] = useState<number | null>(null)
 
   const visible = ALL_LEVELS.filter((l) => {
     if (filterCat   && l.category !== filterCat)   return false
@@ -28,13 +33,8 @@ export default function Home({ onSelect }) {
     return true
   })
 
-  function toggleCat(id) {
-    setFilterCat((prev) => (prev === id ? null : id))
-  }
-
-  function toggleStars(n) {
-    setFilterStars((prev) => (prev === n ? null : n))
-  }
+  const toggleCat   = (id: CategoryId) => setFilterCat((prev)  => prev === id ? null : id)
+  const toggleStars = (n: number)      => setFilterStars((prev) => prev === n  ? null : n)
 
   const activeCat = filterCat ? CATEGORIES.find((c) => c.id === filterCat) : null
 
