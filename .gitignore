@@ -3,8 +3,5 @@ dist/
 .env
 *.local
 
-# Terraform local state
-automation/terraform/.terraform/
-automation/terraform/terraform.tfstate
-automation/terraform/terraform.tfstate.backup
-automation/terraform/.terraform.lock.hcl
+# Terraform — keep local only
+automation/
