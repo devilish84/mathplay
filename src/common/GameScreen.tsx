@@ -9,6 +9,7 @@ import ColumnAddition from '../addition/column/ColumnAddition'
 import StandardAddition from '../addition/standard/StandardAddition'
 import StandardMultiplication from '../multiplication/StandardMultiplication'
 import { scorePoint, nextQuestion, resetGame } from '../store/gameSlice'
+import { getLevelLocale } from '../i18n/levelLocales'
 import type { Level } from '../types'
 import type { AppDispatch, RootState } from '../store'
 
@@ -20,7 +21,7 @@ export default function GameScreen({ level, total, onBack }: Props) {
   const lang     = useLang()
   const dispatch = useDispatch<AppDispatch>()
   const isTest   = useSelector((s: RootState) => s.game.mode === 'test')
-  const levelLabel = lang === 'en' && level.en ? level.en.label : level.label
+  const levelLabel = getLevelLocale(level.id, lang, level.en, level).label
 
   const [questionNum, setQuestionNum] = useState(0)
   const [score, setScore]             = useState(0)

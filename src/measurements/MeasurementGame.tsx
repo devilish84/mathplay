@@ -4,6 +4,7 @@ import { useTranslation, useLang } from '../i18n'
 import translations from '../i18n/measurements/MeasurementGame.i18n'
 import Summary from '../common/Summary'
 import { scorePoint, nextQuestion, resetGame } from '../store/gameSlice'
+import { getLevelLocale } from '../i18n/levelLocales'
 import type { MeasureLevel, MeasureQuestion } from './levels'
 import type { AppDispatch, RootState } from '../store'
 
@@ -14,7 +15,7 @@ export default function MeasurementGame({ level, total, onBack }: Props) {
   const lang     = useLang()
   const dispatch = useDispatch<AppDispatch>()
   const isTest   = useSelector((s: RootState) => s.game.mode === 'test')
-  const levelLabel = lang === 'en' && level.en ? level.en.label : level.label
+  const levelLabel = getLevelLocale(level.id, lang, level.en, level).label
 
   const isMixed = level.op === 'mm_to_cm_mm' || level.op === 'm_to_km_m'
 

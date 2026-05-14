@@ -4,6 +4,7 @@ import { useTranslation, useLang } from '../i18n'
 import translations from '../i18n/sequences/SequenceGame.i18n'
 import Summary from '../common/Summary'
 import { scorePoint, nextQuestion, resetGame } from '../store/gameSlice'
+import { getLevelLocale } from '../i18n/levelLocales'
 import { SEQ_SHOW, SEQ_ASK } from './levels'
 import type { SeqLevel } from '../types'
 import type { AppDispatch, RootState } from '../store'
@@ -15,7 +16,7 @@ export default function SequenceGame({ level, total, onBack }: Props) {
   const lang     = useLang()
   const dispatch = useDispatch<AppDispatch>()
   const isTest   = useSelector((s: RootState) => s.game.mode === 'test')
-  const levelLabel = lang === 'en' && level.en ? level.en.label : level.label
+  const levelLabel = getLevelLocale(level.id, lang, level.en, level).label
 
   const [questionNum, setQuestionNum] = useState(0)
   const [score, setScore]             = useState(0)
