@@ -7,6 +7,7 @@ import ColumnSubtraction from '../subtraction/column/ColumnSubtraction'
 import StandardQuestion from '../subtraction/standard/StandardQuestion'
 import ColumnAddition from '../addition/column/ColumnAddition'
 import StandardAddition from '../addition/standard/StandardAddition'
+import StandardMultiplication from '../multiplication/StandardMultiplication'
 import { startGame, scorePoint, nextQuestion, endGame } from '../store/gameSlice'
 import type { Level } from '../types'
 import type { AppDispatch } from '../store'
@@ -63,7 +64,13 @@ export default function GameScreen({ level, onBack }: Props) {
         <span className={`level-badge ${level.className}`}>{levelLabel}</span>
       </div>
 
-      {level.op === 'add' ? (
+      {level.op === 'mul' ? (
+        <StandardMultiplication
+          key={`${question.a}-${question.b}-${questionNum}`}
+          a={question.a} b={question.b}
+          onCorrect={handleCorrect} onWrong={handleWrong}
+        />
+      ) : level.op === 'add' ? (
         level.mode === 'column' ? (
           <ColumnAddition
             key={`${question.a}-${question.b}-${questionNum}`}

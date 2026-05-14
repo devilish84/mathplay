@@ -990,7 +990,50 @@ body {
 .cat-add   { background: linear-gradient(135deg, #55efc4, #00b894); }
 .cat-sub   { background: linear-gradient(135deg, #fd79a8, #d63031); }
 .cat-seq   { background: linear-gradient(135deg, #74b9ff, #0984e3); }
+.cat-mul   { background: linear-gradient(135deg, #fdcb6e, #e17055); }
 .cat-units { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
+
+/* ── Multiplication ── */
+.mul-question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.mul-equation {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mul-num {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #2d3436;
+}
+
+.mul-op {
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: #636e72;
+}
+
+.mul-input {
+  width: 80px;
+  height: 80px;
+  border: 3px solid #dfe6e9;
+  border-radius: 16px;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  color: #2d3436;
+  transition: border-color 0.2s;
+}
+.mul-input:focus  { border-color: #74b9ff; }
+.mul-input.correct { border-color: #00b894; background: #d4f7ee; }
+.mul-input.wrong   { border-color: #d63031; background: #ffe4e4; }
 
 .cat-disabled {
   opacity: 0.45;

@@ -14,7 +14,7 @@ export interface Level {
   className: string
   generate: () => { a: number; b: number }
   mode: 'standard' | 'column'
-  op?: 'add'
+  op?: 'add' | 'mul'
 }
 
 export interface SeqLevel {
