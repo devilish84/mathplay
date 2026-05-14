@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from '../../i18n'
 import translations from './StandardQuestion.i18n'
 
-export default function StandardQuestion({ a, b, onCorrect, onWrong }) {
+interface Props { a: number; b: number; onCorrect: () => void; onWrong: (answer: number) => void }
+
+export default function StandardQuestion({ a, b, onCorrect, onWrong }: Props) {
   const t      = useTranslation(translations)
   const answer = a - b
-  const [value, setValue]       = useState('')
-  const [checked, setChecked]   = useState(false)
-  const [isCorrect, setIsCorrect] = useState(null)
-  const inputRef = useRef(null)
+  const [value, setValue]         = useState('')
+  const [checked, setChecked]     = useState(false)
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     setValue(''); setChecked(false); setIsCorrect(null)

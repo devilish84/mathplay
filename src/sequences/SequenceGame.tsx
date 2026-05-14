@@ -1,22 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from '../i18n'
 import translations from './SequenceGame.i18n'
 import Summary from '../common/Summary'
 import { SEQ_SHOW, SEQ_ASK } from './levels'
+import type { SeqLevel } from '../types'
 
 const QUESTIONS_PER_ROUND = 10
 
-export default function SequenceGame({ level, onBack }) {
+interface Props { level: SeqLevel; onBack: () => void }
+
+export default function SequenceGame({ level, onBack }: Props) {
   const t = useTranslation(translations)
 
   const [questionNum, setQuestionNum] = useState(0)
   const [score, setScore]             = useState(0)
   const [seq, setSeq]                 = useState(() => level.generate())
-  const [answers, setAnswers]         = useState(Array(SEQ_ASK).fill(''))
+  const [answers, setAnswers]         = useState<string[]>(() => Array(SEQ_ASK).fill(''))
   const [checked, setChecked]         = useState(false)
   const [showStep, setShowStep]       = useState(false)
   const [done, setDone]               = useState(false)
-  const inputRefs = useRef([])
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
   const fullSeq     = Array.from({ length: SEQ_SHOW + SEQ_ASK }, (_, i) => seq.start - i * seq.step)
   const givenNums   = fullSeq.slice(0, SEQ_SHOW)
@@ -31,14 +34,12 @@ export default function SequenceGame({ level, onBack }) {
 
   const allCorrect = checked && correctNums.every((n, i) => parseInt(answers[i], 10) === n)
 
-  const handleChange = (i, val) => {
+  const handleChange = (i: number, val: string) => {
     if (checked) return
-    const next = [...answers]
-    next[i] = val.replace(/[^0-9]/g, '')
-    setAnswers(next)
+    const next = [...answers]; next[i] = val.replace(/[^0-9]/g, ''); setAnswers(next)
   }
 
-  const handleKey = (i, e) => {
+  const handleKey = (i: number, e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === 'Tab') {
       e.preventDefault()
       if (i < SEQ_ASK - 1) inputRefs.current[i + 1]?.focus()
@@ -56,8 +57,7 @@ export default function SequenceGame({ level, onBack }) {
   const next = () => {
     const n = questionNum + 1
     if (n >= QUESTIONS_PER_ROUND) { setDone(true); return }
-    setQuestionNum(n)
-    setSeq(level.generate())
+    setQuestionNum(n); setSeq(level.generate())
   }
 
   if (done) {
@@ -67,7 +67,6 @@ export default function SequenceGame({ level, onBack }) {
         total={QUESTIONS_PER_ROUND}
         onRetry={() => { setQuestionNum(0); setScore(0); setSeq(level.generate()); setDone(false) }}
         onBack={onBack}
-        level={level}
       />
     )
   }
@@ -94,19 +93,18 @@ export default function SequenceGame({ level, onBack }) {
 
       <div className="seq-row">
         {givenNums.map((n, i) => (
-          <React.Fragment key={`g${i}`}>
+          <div key={`g${i}`} style={{ display: 'contents' }}>
             <div className="seq-card seq-given">{n}</div>
             <div className="seq-arrow">→</div>
-          </React.Fragment>
+          </div>
         ))}
-
         {Array.from({ length: SEQ_ASK }, (_, i) => {
           const correct = checked && parseInt(answers[i], 10) === correctNums[i]
           const wrong   = checked && parseInt(answers[i], 10) !== correctNums[i]
           return (
-            <React.Fragment key={`a${i}`}>
+            <div key={`a${i}`} style={{ display: 'contents' }}>
               <input
-                ref={(el) => (inputRefs.current[i] = el)}
+                ref={(el) => { inputRefs.current[i] = el }}
                 className={`seq-input${correct ? ' correct' : wrong ? ' wrong' : ''}`}
                 type="text"
                 inputMode="numeric"
@@ -117,36 +115,28 @@ export default function SequenceGame({ level, onBack }) {
                 placeholder="?"
               />
               {i < SEQ_ASK - 1 && <div className="seq-arrow">→</div>}
-            </React.Fragment>
+            </div>
           )
         })}
       </div>
 
       {checked && !allCorrect && (
         <div className="seq-correct-row">
-          {correctNums.map((n, i) => (
-            <div key={i} className="seq-correct-val">{n}</div>
-          ))}
+          {correctNums.map((n, i) => <div key={i} className="seq-correct-val">{n}</div>)}
         </div>
       )}
 
       <div className="col-action-row" style={{ marginTop: 20 }}>
         {!checked && (
-          <button className="check-btn" onClick={check} disabled={answers.some((a) => a === '')}>
-            {t('check')}
-          </button>
+          <button className="check-btn" onClick={check} disabled={answers.some((a) => a === '')}>{t('check')}</button>
         )}
         {!showStep && (
-          <button className="hint-show-btn" onClick={() => setShowStep(true)}>
-            {t('showStep')}
-          </button>
+          <button className="hint-show-btn" onClick={() => setShowStep(true)}>{t('showStep')}</button>
         )}
       </div>
 
       {showStep && (
-        <div className="seq-step-reveal">
-          {t('stepReveal', { step: seq.step })}
-        </div>
+        <div className="seq-step-reveal">{t('stepReveal', { step: seq.step })}</div>
       )}
 
       {checked && (

@@ -1,3 +1,5 @@
+import type { Level } from '../types'
+
 const genAdd1 = () => {
   if (Math.random() < 0.5) {
     const b = Math.floor(Math.random() * 5) + 5
@@ -42,7 +44,7 @@ const genAdd4 = () => {
   return { a: Math.min(a, 999), b: Math.min(b, 999) }
 }
 
-export const ADD_LEVELS = [
+export const ADD_LEVELS: Level[] = [
   { id: 'a1', label: 'Taso 1', title: 'Pienet luvut',                desc: 'Esim. 7 + 8',    en: { label: 'Level 1', title: 'Small numbers',            desc: 'e.g. 7 + 8' },    icon: '⭐',      className: 'lv1', generate: genAdd1, mode: 'standard', op: 'add' },
   { id: 'a2', label: 'Taso 2', title: 'Kymmenet — vaakasuora',     desc: 'Esim. 15 + 9',   en: { label: 'Level 2', title: 'Tens — horizontal',        desc: 'e.g. 15 + 9' },   icon: '⭐⭐',    className: 'lv2', generate: genAdd2, mode: 'standard', op: 'add' },
   { id: 'a3', label: 'Taso 2', title: 'Kymmenet — allekkain',      desc: 'Esim. 15 + 9',   en: { label: 'Level 2', title: 'Tens — column',            desc: 'e.g. 15 + 9' },   icon: '⭐⭐',    className: 'lv2', generate: genAdd2, mode: 'column',   op: 'add' },

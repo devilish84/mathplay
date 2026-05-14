@@ -4,9 +4,19 @@ import Toolbar from './common/Toolbar'
 import Home from './screens/Home'
 import GameScreen from './common/GameScreen'
 import SequenceGame from './sequences/SequenceGame'
+import type { AnyEnrichedLevel, EnrichedLevel, EnrichedSeqLevel } from './levels'
+
+interface Selection {
+  level: AnyEnrichedLevel
+  category: string
+}
+
+function isSeqLevel(l: AnyEnrichedLevel): l is EnrichedSeqLevel {
+  return l.category === 'seq'
+}
 
 export default function App() {
-  const [selection, setSelection] = useState(null) // { level, category }
+  const [selection, setSelection] = useState<Selection | null>(null)
 
   return (
     <div className="app-shell">
@@ -14,14 +24,14 @@ export default function App() {
       <div className="app-content">
         {!selection ? (
           <Home onSelect={setSelection} />
-        ) : selection.category === 'seq' ? (
+        ) : isSeqLevel(selection.level) ? (
           <SequenceGame
             level={selection.level}
             onBack={() => setSelection(null)}
           />
         ) : (
           <GameScreen
-            level={selection.level}
+            level={selection.level as EnrichedLevel}
             onBack={() => setSelection(null)}
           />
         )}

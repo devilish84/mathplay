@@ -1,25 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from '../../i18n'
 import translations from './ColumnSubtraction.i18n'
 import BorrowingHint from './BorrowingHint'
 
-export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
+interface Props { a: number; b: number; onCorrect: () => void; onWrong: (answer: number) => void }
+
+export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
   const t      = useTranslation(translations)
   const answer = a - b
   const ansStr = String(answer)
   const aDigits = String(a).split('').map(Number)
   const bDigits = String(b).split('').map(Number)
-  const cols = Math.max(aDigits.length, bDigits.length, ansStr.length)
+  const cols    = Math.max(aDigits.length, bDigits.length, ansStr.length)
 
-  const padLeft = (arr) => Array(cols - arr.length).fill(null).concat(arr)
-  const aCols = padLeft(aDigits)
-  const bCols = padLeft(bDigits)
+  const padLeft = (arr: number[]) => Array<number | null>(cols - arr.length).fill(null).concat(arr)
+  const aCols   = padLeft(aDigits)
+  const bCols   = padLeft(bDigits)
 
-  const [borrows, setBorrows] = useState(Array(cols).fill(false))
-  const [digits, setDigits]   = useState(Array(ansStr.length).fill(''))
+  const [borrows, setBorrows] = useState<boolean[]>(() => Array(cols).fill(false))
+  const [digits, setDigits]   = useState<string[]>(() => Array(ansStr.length).fill(''))
   const [checked, setChecked] = useState(false)
   const [showHint, setShowHint] = useState(false)
-  const inputRefs = useRef([])
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
   useEffect(() => {
     setDigits(Array(ansStr.length).fill(''))
@@ -29,7 +31,7 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
     setTimeout(() => inputRefs.current[ansStr.length - 1]?.focus(), 50)
   }, [a, b])
 
-  const toggleBorrow = (colIdx) => {
+  const toggleBorrow = (colIdx: number) => {
     if (checked) return
     if (aCols[colIdx] === null || aCols[colIdx] === 0) return
     setBorrows((prev) => { const next = [...prev]; next[colIdx] = !next[colIdx]; return next })
@@ -43,14 +45,14 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
     return val
   })
 
-  const handleDigit = (i, val) => {
+  const handleDigit = (i: number, val: string) => {
     if (checked) return
     const v = val.replace(/\D/g, '').slice(-1)
     const next = [...digits]; next[i] = v; setDigits(next)
     if (v && i > 0) inputRefs.current[i - 1]?.focus()
   }
 
-  const handleKey = (i, e) => {
+  const handleKey = (i: number, e: React.KeyboardEvent) => {
     if (e.key === 'Backspace' && !digits[i] && i < ansStr.length - 1) inputRefs.current[i + 1]?.focus()
     if (e.key === 'Enter') check()
   }
@@ -62,15 +64,14 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
     if (correct) onCorrect(); else onWrong(answer)
   }
 
-  const isCorrect     = checked && digits.join('') === ansStr
-  const answerOffset  = cols - ansStr.length
-  const colLabels     = [t('hundreds'), t('tens'), t('ones')]
-  const getLabel      = (i) => colLabels[cols - 1 - i] ?? ''
+  const isCorrect    = checked && digits.join('') === ansStr
+  const answerOffset = cols - ansStr.length
+  const colLabels    = [t('hundreds'), t('tens'), t('ones')]
+  const getLabel     = (i: number) => colLabels[cols - 1 - i] ?? ''
 
   return (
     <div className="column-subtraction">
       <div className="column-numbers">
-
         {!checked && (
           <div className="column-row col-label-row">
             <div className="col-digit col-sign-placeholder" />
@@ -84,7 +85,7 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
           <div className="col-digit col-sign-placeholder" />
           {aCols.map((d, i) => (
             <div key={i} className="col-digit borrow-annotation-cell">
-              {borrows[i]      && <span className="borrow-strikethrough">{d}</span>}
+              {borrows[i]          && <span className="borrow-strikethrough">{d}</span>}
               {i > 0 && borrows[i - 1] && <span className="borrow-plus10">+10</span>}
             </div>
           ))}
@@ -93,7 +94,7 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
         <div className="column-row">
           <div className="col-digit col-sign-placeholder" />
           {aCols.map((d, i) => {
-            const canBorrow  = effectiveA[i] !== null && effectiveA[i] > 0 && i < cols - 1 && !checked
+            const canBorrow  = effectiveA[i] !== null && effectiveA[i]! > 0 && i < cols - 1 && !checked
             const gives      = borrows[i]
             const receives   = i > 0 && borrows[i - 1]
             const isModified = gives || receives
@@ -123,13 +124,13 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
 
         <div className="column-answer-row">
           <div className="col-digit col-sign-placeholder" />
-          {Array(answerOffset).fill(null).map((_, i) => (
+          {Array(answerOffset).fill(null).map((_: null, i: number) => (
             <div key={`empty-${i}`} className="col-digit" />
           ))}
           {Array.from({ length: ansStr.length }, (_, i) => (
             <input
               key={i}
-              ref={(el) => (inputRefs.current[i] = el)}
+              ref={(el) => { inputRefs.current[i] = el }}
               className={`col-input ${checked ? (isCorrect ? 'correct' : 'wrong') : ''}`}
               type="text"
               inputMode="numeric"
@@ -144,9 +145,7 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
       </div>
 
       {!checked && (
-        <p className="borrow-hint-tip">
-          {t('startOnes')} · {t('borrowTip')}
-        </p>
+        <p className="borrow-hint-tip">{t('startOnes')} · {t('borrowTip')}</p>
       )}
 
       <div className="col-action-row">
@@ -156,9 +155,7 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }) {
           </button>
         )}
         {!showHint && (
-          <button className="hint-show-btn" onClick={() => setShowHint(true)}>
-            {t('hint')}
-          </button>
+          <button className="hint-show-btn" onClick={() => setShowHint(true)}>{t('hint')}</button>
         )}
       </div>
 

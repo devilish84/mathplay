@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { ADD_LEVELS } from './levels'
 import LevelSelect from '../common/LevelSelect'
 import GameScreen from '../common/GameScreen'
+import type { Level } from '../types'
 
-export default function AdditionPage({ onBack }) {
-  const [level, setLevel] = useState(null)
+interface Props { onBack: () => void }
+
+export default function AdditionPage({ onBack }: Props) {
+  const [level, setLevel] = useState<Level | null>(null)
 
   if (!level) {
     return (
@@ -12,7 +15,7 @@ export default function AdditionPage({ onBack }) {
         levels={ADD_LEVELS}
         title="➕ Yhteenlaskut"
         subtitle="Valitse taso"
-        onSelect={setLevel}
+        onSelect={(lv) => setLevel(lv as any)}
         onBack={onBack}
       />
     )

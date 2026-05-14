@@ -1,8 +1,14 @@
-import React from 'react'
 import { useTranslation } from '../i18n'
 import translations from './Summary.i18n'
 
-export default function Summary({ score, total, onRetry, onBack }) {
+interface Props {
+  score: number
+  total: number
+  onRetry: () => void
+  onBack: () => void
+}
+
+export default function Summary({ score, total, onRetry, onBack }: Props) {
   const t   = useTranslation(translations)
   const pct = Math.round((score / total) * 100)
 
@@ -13,9 +19,7 @@ export default function Summary({ score, total, onRetry, onBack }) {
     <div className="summary">
       <div className="emoji-big">{emoji}</div>
       <h2>{msg}</h2>
-      <div className="result-text">
-        {t('result', { score, total, pct })}
-      </div>
+      <div className="result-text">{t('result', { score, total, pct })}</div>
       <div className="summary-buttons">
         <button className="retry-btn" onClick={onRetry}>{t('retry')}</button>
         <button className="home-btn"  onClick={onBack}>{t('back')}</button>
