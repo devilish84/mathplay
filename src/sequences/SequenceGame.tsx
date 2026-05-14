@@ -85,40 +85,46 @@ export default function SequenceGame({ level, onBack }: Props) {
   }
 
   return (
-    <div className="game-screen">
+    <div className="game-screen game-screen--seq">
       <div className="game-header">
         <span className={`level-badge ${level.className}`}>{levelLabel}</span>
       </div>
 
       <p className="seq-instruction">{t('instruction')}</p>
 
-      <div className="seq-row">
-        {givenNums.map((n, i) => (
-          <div key={`g${i}`} style={{ display: 'contents' }}>
-            <div className="seq-card seq-given">{n}</div>
-            <div className="seq-arrow">→</div>
-          </div>
-        ))}
-        {Array.from({ length: SEQ_ASK }, (_, i) => {
-          const correct = checked && parseInt(answers[i], 10) === correctNums[i]
-          const wrong   = checked && parseInt(answers[i], 10) !== correctNums[i]
-          return (
-            <div key={`a${i}`} style={{ display: 'contents' }}>
-              <input
-                ref={(el) => { inputRefs.current[i] = el }}
-                className={`seq-input${correct ? ' correct' : wrong ? ' wrong' : ''}`}
-                type="text"
-                inputMode="numeric"
-                value={answers[i]}
-                onChange={(e) => handleChange(i, e.target.value)}
-                onKeyDown={(e) => handleKey(i, e)}
-                disabled={checked}
-                placeholder="?"
-              />
-              {i < SEQ_ASK - 1 && <div className="seq-arrow">→</div>}
+      <div className="seq-rows">
+        <div className="seq-row">
+          {givenNums.map((n, i) => (
+            <div key={`g${i}`} style={{ display: 'contents' }}>
+              <div className="seq-card seq-given">{n}</div>
+              <div className="seq-arrow">→</div>
             </div>
-          )
-        })}
+          ))}
+          <div className="seq-arrow seq-arrow--turn">↲</div>
+        </div>
+
+        <div className="seq-row seq-row--answers">
+          {Array.from({ length: SEQ_ASK }, (_, i) => {
+            const correct = checked && parseInt(answers[i], 10) === correctNums[i]
+            const wrong   = checked && parseInt(answers[i], 10) !== correctNums[i]
+            return (
+              <div key={`a${i}`} style={{ display: 'contents' }}>
+                <input
+                  ref={(el) => { inputRefs.current[i] = el }}
+                  className={`seq-input${correct ? ' correct' : wrong ? ' wrong' : ''}`}
+                  type="text"
+                  inputMode="numeric"
+                  value={answers[i]}
+                  onChange={(e) => handleChange(i, e.target.value)}
+                  onKeyDown={(e) => handleKey(i, e)}
+                  disabled={checked}
+                  placeholder="?"
+                />
+                {i < SEQ_ASK - 1 && <div className="seq-arrow">→</div>}
+              </div>
+            )
+          })}
+        </div>
       </div>
 
       {checked && !allCorrect && (

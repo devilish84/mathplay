@@ -684,13 +684,28 @@ body {
   margin-bottom: 20px;
 }
 
+.game-screen--seq { max-width: 680px; }
+
+.seq-rows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
 .seq-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.seq-row--answers {
+  align-self: stretch;
+  justify-content: flex-end;
+  padding-right: 4px;
 }
 
 .seq-card {
@@ -717,6 +732,12 @@ body {
   padding: 0 2px;
 }
 
+.seq-arrow--turn {
+  font-size: 1.5rem;
+  color: #7c3aed;
+  padding: 0 4px;
+}
+
 .seq-input {
   width: 82px;
   min-width: 82px;
@@ -737,10 +758,11 @@ body {
 
 .seq-correct-row {
   display: flex;
-  justify-content: center;
-  gap: 4px;
-  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  flex-wrap: nowrap;
   margin-top: 6px;
+  padding-right: 4px;
 }
 
 .seq-correct-val {
