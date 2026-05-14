@@ -1,12 +1,14 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import settingsReducer from './settingsSlice'
 import progressReducer from './progressSlice'
+import gameReducer from './gameSlice'
 
 const STORAGE_KEY = 'mathplay_state'
 
 const rootReducer = combineReducers({
   settings: settingsReducer,
   progress: progressReducer,
+  game: gameReducer,
 })
 
 const store = configureStore({

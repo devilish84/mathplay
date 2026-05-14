@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { useTranslation, useLang } from '../i18n'
 import translations from './GameScreen.i18n'
 import Summary from './Summary'
@@ -6,7 +7,9 @@ import ColumnSubtraction from '../subtraction/column/ColumnSubtraction'
 import StandardQuestion from '../subtraction/standard/StandardQuestion'
 import ColumnAddition from '../addition/column/ColumnAddition'
 import StandardAddition from '../addition/standard/StandardAddition'
+import { startGame, scorePoint, nextQuestion, endGame } from '../store/gameSlice'
 import type { Level } from '../types'
+import type { AppDispatch } from '../store'
 
 const QUESTIONS_PER_ROUND = 10
 
@@ -14,8 +17,9 @@ interface Feedback { correct: boolean; correctAnswer?: number }
 interface Props { level: Level; onBack: () => void }
 
 export default function GameScreen({ level, onBack }: Props) {
-  const t    = useTranslation(translations)
-  const lang = useLang()
+  const t        = useTranslation(translations)
+  const lang     = useLang()
+  const dispatch = useDispatch<AppDispatch>()
   const levelLabel = lang === 'en' && level.en ? level.en.label : level.label
 
   const [questionNum, setQuestionNum] = useState(0)
@@ -24,44 +28,40 @@ export default function GameScreen({ level, onBack }: Props) {
   const [feedback, setFeedback]       = useState<Feedback | null>(null)
   const [done, setDone]               = useState(false)
 
+  useEffect(() => { dispatch(startGame(QUESTIONS_PER_ROUND)); return () => { dispatch(endGame()) } }, [dispatch])
+
   const newQuestion = () => {
     const next = questionNum + 1
+    dispatch(nextQuestion())
     if (next >= QUESTIONS_PER_ROUND) { setDone(true); return }
     setQuestionNum(next)
     setQuestion(level.generate())
     setFeedback(null)
   }
 
-  const handleCorrect = () => { setScore((s) => s + 1); setFeedback({ correct: true }) }
-  const handleWrong   = (correctAnswer: number) => setFeedback({ correct: false, correctAnswer })
+  const handleCorrect = () => {
+    dispatch(scorePoint())
+    setScore((s) => s + 1)
+    setFeedback({ correct: true })
+  }
+  const handleWrong = (correctAnswer: number) => setFeedback({ correct: false, correctAnswer })
 
   if (done) {
     return (
       <Summary
         score={score}
         total={QUESTIONS_PER_ROUND}
-        onRetry={() => { setQuestionNum(0); setScore(0); setQuestion(level.generate()); setFeedback(null); setDone(false) }}
+        onRetry={() => { dispatch(startGame(QUESTIONS_PER_ROUND)); setQuestionNum(0); setScore(0); setQuestion(level.generate()); setFeedback(null); setDone(false) }}
         onBack={onBack}
       />
     )
   }
-
-  const progress = (questionNum / QUESTIONS_PER_ROUND) * 100
 
   return (
     <div className="game-screen">
       <div className="game-header">
         <button className="back-btn" onClick={onBack}>{t('back')}</button>
         <span className={`level-badge ${level.className}`}>{levelLabel}</span>
-        <div className="score-display">{t('points')}: <span>{score}</span></div>
-      </div>
-
-      <div className="progress-bar">
-        <div className="progress-fill" style={{ width: `${progress}%` }} />
-      </div>
-
-      <div style={{ textAlign: 'center', color: '#b2bec3', marginBottom: 20, fontSize: '0.9rem' }}>
-        {t('question')} {questionNum + 1} {t('of')} {QUESTIONS_PER_ROUND}
       </div>
 
       {level.op === 'add' ? (

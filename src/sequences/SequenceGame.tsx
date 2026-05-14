@@ -1,17 +1,21 @@
 import { useState, useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
 import { useTranslation, useLang } from '../i18n'
 import translations from './SequenceGame.i18n'
 import Summary from '../common/Summary'
+import { startGame, scorePoint, nextQuestion, endGame } from '../store/gameSlice'
 import { SEQ_SHOW, SEQ_ASK } from './levels'
 import type { SeqLevel } from '../types'
+import type { AppDispatch } from '../store'
 
 const QUESTIONS_PER_ROUND = 10
 
 interface Props { level: SeqLevel; onBack: () => void }
 
 export default function SequenceGame({ level, onBack }: Props) {
-  const t    = useTranslation(translations)
-  const lang = useLang()
+  const t        = useTranslation(translations)
+  const lang     = useLang()
+  const dispatch = useDispatch<AppDispatch>()
   const levelLabel = lang === 'en' && level.en ? level.en.label : level.label
 
   const [questionNum, setQuestionNum] = useState(0)
@@ -27,6 +31,8 @@ export default function SequenceGame({ level, onBack }: Props) {
   const fullSeq     = Array.from({ length: SEQ_SHOW + SEQ_ASK }, (_, i) => asc ? seq.start + i * seq.step : seq.start - i * seq.step)
   const givenNums   = fullSeq.slice(0, SEQ_SHOW)
   const correctNums = fullSeq.slice(SEQ_SHOW)
+
+  useEffect(() => { dispatch(startGame(QUESTIONS_PER_ROUND)); return () => { dispatch(endGame()) } }, [dispatch])
 
   useEffect(() => {
     setAnswers(Array(SEQ_ASK).fill(''))
@@ -54,11 +60,15 @@ export default function SequenceGame({ level, onBack }: Props) {
   const check = () => {
     if (checked || answers.some((a) => a === '')) return
     setChecked(true)
-    if (correctNums.every((n, i) => parseInt(answers[i], 10) === n)) setScore((s) => s + 1)
+    if (correctNums.every((n, i) => parseInt(answers[i], 10) === n)) {
+      dispatch(scorePoint())
+      setScore((s) => s + 1)
+    }
   }
 
   const next = () => {
     const n = questionNum + 1
+    dispatch(nextQuestion())
     if (n >= QUESTIONS_PER_ROUND) { setDone(true); return }
     setQuestionNum(n); setSeq(level.generate())
   }
@@ -68,28 +78,17 @@ export default function SequenceGame({ level, onBack }: Props) {
       <Summary
         score={score}
         total={QUESTIONS_PER_ROUND}
-        onRetry={() => { setQuestionNum(0); setScore(0); setSeq(level.generate()); setDone(false) }}
+        onRetry={() => { dispatch(startGame(QUESTIONS_PER_ROUND)); setQuestionNum(0); setScore(0); setSeq(level.generate()); setDone(false) }}
         onBack={onBack}
       />
     )
   }
-
-  const progress = (questionNum / QUESTIONS_PER_ROUND) * 100
 
   return (
     <div className="game-screen">
       <div className="game-header">
         <button className="back-btn" onClick={onBack}>{t('back')}</button>
         <span className={`level-badge ${level.className}`}>{levelLabel}</span>
-        <div className="score-display">{t('points')}: <span>{score}</span></div>
-      </div>
-
-      <div className="progress-bar">
-        <div className="progress-fill" style={{ width: `${progress}%` }} />
-      </div>
-
-      <div style={{ textAlign: 'center', color: '#b2bec3', marginBottom: 20, fontSize: '0.9rem' }}>
-        {t('question')} {questionNum + 1} {t('of')} {QUESTIONS_PER_ROUND}
       </div>
 
       <p className="seq-instruction">{t('instruction')}</p>
