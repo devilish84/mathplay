@@ -992,6 +992,38 @@ body {
   padding: 3rem 0;
 }
 
+.home-footer {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.home-footer-sep {
+  margin: 0 0.4rem;
+}
+
+.home-footer-link {
+  color: #94a3b8;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.home-footer-link:hover {
+  color: #64748b;
+}
+
+.home-footer-claude {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.home-footer-claude-icon {
+  font-size: 0.7rem;
+  color: #c084fc;
+}
+
 /* ── Task card grid ── */
 .task-grid {
   display: grid;

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useTranslation, useLang } from '../i18n'
 import translations from '../i18n/screens/Home.i18n'
 import { ALL_LEVELS, type AnyEnrichedLevel } from '../levels'
+import { getLevelLocale } from '../i18n/levelLocales'
 
 interface Selection { level: AnyEnrichedLevel; category: string }
 
@@ -81,7 +82,7 @@ export default function Home({ onSelect }: Props) {
       ) : (
         <div className="task-grid">
           {visible.map((level) => {
-            const loc = lang === 'en' && level.en ? level.en : level
+            const loc = getLevelLocale(level.id, lang, level.en, level)
             return (
               <button
                 key={level.id}
@@ -99,6 +100,39 @@ export default function Home({ onSelect }: Props) {
           })}
         </div>
       )}
+      <footer className="home-footer">
+        <span>© {new Date().getFullYear()} </span>
+        <a href="https://x84.fi" target="_blank" rel="noopener noreferrer" className="home-footer-link">
+          Mika Mähönen
+        </a>
+        <span className="home-footer-sep">·</span>
+        <a
+          href="https://opensource.org/licenses/MIT"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="home-footer-link"
+        >
+          MIT License
+        </a>
+        <span className="home-footer-sep">·</span>
+        <a
+          href="https://github.com/devilish84/mathplay"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="home-footer-link"
+        >
+          GitHub
+        </a>
+        <span className="home-footer-sep">·</span>
+        <a
+          href="https://claude.ai"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="home-footer-link home-footer-claude"
+        >
+          <span className="home-footer-claude-icon">✦</span> Built with Claude
+        </a>
+      </footer>
     </div>
   )
 }
