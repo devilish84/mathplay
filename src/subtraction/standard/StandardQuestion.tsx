@@ -26,18 +26,20 @@ export default function StandardQuestion({ a, b, onCorrect, onWrong }: Props) {
 
   return (
     <div className="answer-area">
-      <div className="question-text">{a} − {b} = ?</div>
-      <input
-        ref={inputRef}
-        className={`answer-input ${checked ? (isCorrect ? 'correct' : 'wrong') : ''}`}
-        type="text"
-        inputMode="numeric"
-        value={value}
-        onChange={(e) => !checked && setValue(e.target.value.replace(/\D/g, ''))}
-        onKeyDown={(e) => e.key === 'Enter' && check()}
-        disabled={checked}
-        placeholder="?"
-      />
+      <div className="question-inline">
+        <span className="question-part">{a} − {b} =</span>
+        <input
+          ref={inputRef}
+          className={`answer-input-inline ${checked ? (isCorrect ? 'correct' : 'wrong') : ''}`}
+          type="text"
+          inputMode="numeric"
+          value={value}
+          onChange={(e) => !checked && setValue(e.target.value.replace(/\D/g, ''))}
+          onKeyDown={(e) => e.key === 'Enter' && check()}
+          disabled={checked}
+          placeholder="?"
+        />
+      </div>
       {!checked && (
         <button className="check-btn" onClick={check} disabled={value === ''}>{t('check')}</button>
       )}
