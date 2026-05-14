@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { useTranslation } from '../i18n'
+import { useTranslation, useLang } from '../i18n'
 import translations from './SequenceGame.i18n'
 import Summary from '../common/Summary'
 import { SEQ_SHOW, SEQ_ASK } from './levels'
@@ -10,7 +10,9 @@ const QUESTIONS_PER_ROUND = 10
 interface Props { level: SeqLevel; onBack: () => void }
 
 export default function SequenceGame({ level, onBack }: Props) {
-  const t = useTranslation(translations)
+  const t    = useTranslation(translations)
+  const lang = useLang()
+  const levelLabel = lang === 'en' && level.en ? level.en.label : level.label
 
   const [questionNum, setQuestionNum] = useState(0)
   const [score, setScore]             = useState(0)
@@ -77,7 +79,7 @@ export default function SequenceGame({ level, onBack }: Props) {
     <div className="game-screen">
       <div className="game-header">
         <button className="back-btn" onClick={onBack}>{t('back')}</button>
-        <span className={`level-badge ${level.className}`}>{level.label}</span>
+        <span className={`level-badge ${level.className}`}>{levelLabel}</span>
         <div className="score-display">{t('points')}: <span>{score}</span></div>
       </div>
 

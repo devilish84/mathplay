@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useTranslation } from '../i18n'
+import { useTranslation, useLang } from '../i18n'
 import translations from './GameScreen.i18n'
 import Summary from './Summary'
 import ColumnSubtraction from '../subtraction/column/ColumnSubtraction'
@@ -14,7 +14,9 @@ interface Feedback { correct: boolean; correctAnswer?: number }
 interface Props { level: Level; onBack: () => void }
 
 export default function GameScreen({ level, onBack }: Props) {
-  const t = useTranslation(translations)
+  const t    = useTranslation(translations)
+  const lang = useLang()
+  const levelLabel = lang === 'en' && level.en ? level.en.label : level.label
 
   const [questionNum, setQuestionNum] = useState(0)
   const [score, setScore]             = useState(0)
@@ -50,7 +52,7 @@ export default function GameScreen({ level, onBack }: Props) {
     <div className="game-screen">
       <div className="game-header">
         <button className="back-btn" onClick={onBack}>{t('back')}</button>
-        <span className={`level-badge ${level.className}`}>{level.label}</span>
+        <span className={`level-badge ${level.className}`}>{levelLabel}</span>
         <div className="score-display">{t('points')}: <span>{score}</span></div>
       </div>
 
