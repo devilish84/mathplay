@@ -1,22 +1,34 @@
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLanguage } from '../store/settingsSlice'
+import { tickTimer, endGame } from '../store/gameSlice'
 import { useTranslation, LANGUAGES } from '../i18n'
 import translations from '../i18n/common/Toolbar.i18n'
-import type { RootState } from '../store'
-import type { Session } from '../types'
+import type { AppDispatch, RootState } from '../store'
 
 interface Props { onBack?: () => void }
 
+function formatTime(seconds: number) {
+  const m = Math.floor(seconds / 60)
+  const s = seconds % 60
+  return `${m}:${String(s).padStart(2, '0')}`
+}
+
 export default function Toolbar({ onBack }: Props) {
   const t        = useTranslation(translations)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const language = useSelector((s: RootState) => s.settings.language)
-  const sessions = useSelector((s: RootState) => s.progress.sessions)
   const game     = useSelector((s: RootState) => s.game)
 
-  const total   = sessions.reduce((sum: number, s: Session) => sum + s.total, 0)
-  const correct = sessions.reduce((sum: number, s: Session) => sum + s.score, 0)
-  const pct     = total > 0 ? Math.round((correct / total) * 100) : null
+
+  const isTimedTest = game.active && game.mode === 'test' && game.timeLimit > 0
+
+  useEffect(() => {
+    if (!isTimedTest) return
+    if (game.timeRemaining <= 0) { dispatch(endGame()); return }
+    const id = setInterval(() => dispatch(tickTimer()), 1000)
+    return () => clearInterval(id)
+  }, [isTimedTest, game.timeRemaining, dispatch])
 
   return (
     <div className="toolbar">
@@ -32,14 +44,14 @@ export default function Toolbar({ onBack }: Props) {
               />
             </div>
             <span>
-              {game.question} / <strong>{game.total}</strong> {t('tasks')} · <strong>{game.score}</strong> {t('correct')}
+              {game.question} / <strong>{game.total}</strong> {t('tasks')} · <strong className="score-correct">{game.score}</strong> {t('correct')} · <strong className="score-wrong">{Math.max(0, game.question - game.score)}</strong> {t('wrong')}
             </span>
+            {isTimedTest && (
+              <span className={`toolbar-timer${game.timeRemaining <= 60 ? ' toolbar-timer--urgent' : ''}`}>
+                ⏱ {formatTime(game.timeRemaining)}
+              </span>
+            )}
           </>
-        ) : total > 0 ? (
-          <span>
-            <strong>{total}</strong> {t('tasks')}
-            {pct !== null && <> · <strong>{pct}%</strong> {t('correct')}</>}
-          </span>
         ) : null}
       </div>
 

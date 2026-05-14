@@ -3,9 +3,9 @@ import { useTranslation } from '../../i18n'
 import translations from '../../i18n/subtraction/ColumnSubtraction.i18n'
 import BorrowingHint from './BorrowingHint'
 
-interface Props { a: number; b: number; onCorrect: () => void; onWrong: (answer: number) => void }
+interface Props { a: number; b: number; onCorrect: () => void; onWrong: (answer: number) => void; hideHint?: boolean }
 
-export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
+export default function ColumnSubtraction({ a, b, onCorrect, onWrong, hideHint = false }: Props) {
   const t      = useTranslation(translations)
   const answer = a - b
   const ansStr = String(answer)
@@ -59,8 +59,9 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
     return val
   })
 
+  // effectiveA[i] already accounts for giving a borrow (-1) plus receiving (+10)
   const borrowSumCorrect = (i: number) =>
-    parseInt(borrowSums[i] ?? '', 10) === (aCols[i] ?? 0) + 10
+    parseInt(borrowSums[i] ?? '', 10) === (effectiveA[i] ?? 0)
 
   const allBorrowSumsOk = aCols.every((_, i) =>
     !(i > 0 && borrows[i - 1]) || borrowSumCorrect(i)
@@ -176,7 +177,7 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
       {pendingBorrowCol >= 0 && (
         <div className="borrow-sum-panel">
           <div className="borrow-sum-equation">
-            <span className="borrow-sum-eq-part">{aCols[pendingBorrowCol]}</span>
+            <span className="borrow-sum-eq-part">{(effectiveA[pendingBorrowCol] ?? 0) - 10}</span>
             <span className="borrow-sum-eq-op">+ 10 =</span>
             <input
               ref={(el) => { borrowRefs.current[pendingBorrowCol] = el }}
@@ -205,12 +206,12 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
             {t('check')}
           </button>
         )}
-        {!showHint && (
+        {!hideHint && !showHint && (
           <button className="hint-show-btn" onClick={() => setShowHint(true)}>{t('hint')}</button>
         )}
       </div>
 
-      {showHint && <BorrowingHint a={a} b={b} />}
+      {!hideHint && showHint && <BorrowingHint a={a} b={b} />}
     </div>
   )
 }

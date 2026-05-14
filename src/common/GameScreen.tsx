@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation, useLang } from '../i18n'
 import translations from '../i18n/common/GameScreen.i18n'
 import Summary from './Summary'
@@ -8,19 +8,18 @@ import StandardQuestion from '../subtraction/standard/StandardQuestion'
 import ColumnAddition from '../addition/column/ColumnAddition'
 import StandardAddition from '../addition/standard/StandardAddition'
 import StandardMultiplication from '../multiplication/StandardMultiplication'
-import { startGame, scorePoint, nextQuestion, endGame } from '../store/gameSlice'
+import { scorePoint, nextQuestion, resetGame } from '../store/gameSlice'
 import type { Level } from '../types'
-import type { AppDispatch } from '../store'
-
-const QUESTIONS_PER_ROUND = 10
+import type { AppDispatch, RootState } from '../store'
 
 interface Feedback { correct: boolean; correctAnswer?: number }
-interface Props { level: Level; onBack: () => void }
+interface Props { level: Level; total: number; onBack: () => void }
 
-export default function GameScreen({ level, onBack }: Props) {
+export default function GameScreen({ level, total, onBack }: Props) {
   const t        = useTranslation(translations)
   const lang     = useLang()
   const dispatch = useDispatch<AppDispatch>()
+  const isTest   = useSelector((s: RootState) => s.game.mode === 'test')
   const levelLabel = lang === 'en' && level.en ? level.en.label : level.label
 
   const [questionNum, setQuestionNum] = useState(0)
@@ -29,12 +28,11 @@ export default function GameScreen({ level, onBack }: Props) {
   const [feedback, setFeedback]       = useState<Feedback | null>(null)
   const [done, setDone]               = useState(false)
 
-  useEffect(() => { dispatch(startGame(QUESTIONS_PER_ROUND)); return () => { dispatch(endGame()) } }, [dispatch])
 
   const newQuestion = () => {
     const next = questionNum + 1
     dispatch(nextQuestion())
-    if (next >= QUESTIONS_PER_ROUND) { setDone(true); return }
+    if (next >= total) { setDone(true); return }
     setQuestionNum(next)
     setQuestion(level.generate())
     setFeedback(null)
@@ -51,8 +49,8 @@ export default function GameScreen({ level, onBack }: Props) {
     return (
       <Summary
         score={score}
-        total={QUESTIONS_PER_ROUND}
-        onRetry={() => { dispatch(startGame(QUESTIONS_PER_ROUND)); setQuestionNum(0); setScore(0); setQuestion(level.generate()); setFeedback(null); setDone(false) }}
+        total={total}
+        onRetry={() => { dispatch(resetGame()); setQuestionNum(0); setScore(0); setQuestion(level.generate()); setFeedback(null); setDone(false) }}
         onBack={onBack}
       />
     )
@@ -76,6 +74,7 @@ export default function GameScreen({ level, onBack }: Props) {
             key={`${question.a}-${question.b}-${questionNum}`}
             a={question.a} b={question.b}
             onCorrect={handleCorrect} onWrong={handleWrong}
+            hideHint={isTest}
           />
         ) : (
           <StandardAddition
@@ -89,6 +88,7 @@ export default function GameScreen({ level, onBack }: Props) {
           key={`${question.a}-${question.b}-${questionNum}`}
           a={question.a} b={question.b}
           onCorrect={handleCorrect} onWrong={handleWrong}
+          hideHint={isTest}
         />
       ) : (
         <StandardQuestion
@@ -106,7 +106,7 @@ export default function GameScreen({ level, onBack }: Props) {
               : t('wrong', { answer: feedback.correctAnswer ?? '' })}
           </div>
           <button className="next-btn" onClick={newQuestion}>
-            {questionNum + 1 < QUESTIONS_PER_ROUND ? t('next') : t('showResult')}
+            {questionNum + 1 < total ? t('next') : t('showResult')}
           </button>
         </>
       )}

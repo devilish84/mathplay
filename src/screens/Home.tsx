@@ -6,10 +6,11 @@ import { ALL_LEVELS, type AnyEnrichedLevel } from '../levels'
 interface Selection { level: AnyEnrichedLevel; category: string }
 
 const CATEGORIES = [
-  { id: 'sub', icon: '➖' },
-  { id: 'add', icon: '➕' },
-  { id: 'mul', icon: '✖️' },
-  { id: 'seq', icon: '🔢' },
+  { id: 'sub',     icon: '➖' },
+  { id: 'add',     icon: '➕' },
+  { id: 'mul',     icon: '✖️' },
+  { id: 'seq',     icon: '🔢' },
+  { id: 'measure', icon: '📏' },
 ] as const
 
 type CategoryId = typeof CATEGORIES[number]['id']

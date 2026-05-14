@@ -3,9 +3,9 @@ import { useTranslation } from '../../i18n'
 import translations from '../../i18n/addition/ColumnAddition.i18n'
 import AdditionHint from './AdditionHint'
 
-interface Props { a: number; b: number; onCorrect: () => void; onWrong: (answer: number) => void }
+interface Props { a: number; b: number; onCorrect: () => void; onWrong: (answer: number) => void; hideHint?: boolean }
 
-export default function ColumnAddition({ a, b, onCorrect, onWrong }: Props) {
+export default function ColumnAddition({ a, b, onCorrect, onWrong, hideHint = false }: Props) {
   const t       = useTranslation(translations)
   const answer  = a + b
   const ansStr  = String(answer)
@@ -156,12 +156,12 @@ export default function ColumnAddition({ a, b, onCorrect, onWrong }: Props) {
             {t('check')}
           </button>
         )}
-        {!showHint && (
+        {!hideHint && !showHint && (
           <button className="hint-show-btn" onClick={() => setShowHint(true)}>{t('hint')}</button>
         )}
       </div>
 
-      {showHint && <AdditionHint a={a} b={b} />}
+      {!hideHint && showHint && <AdditionHint a={a} b={b} />}
     </div>
   )
 }
