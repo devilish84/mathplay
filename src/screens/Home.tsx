@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation, useLang } from '../i18n'
-import translations from './Home.i18n'
+import translations from '../i18n/screens/Home.i18n'
 import { ALL_LEVELS, type AnyEnrichedLevel } from '../levels'
 
 interface Selection { level: AnyEnrichedLevel; category: string }

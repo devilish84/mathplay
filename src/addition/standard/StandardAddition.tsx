@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from '../../i18n'
-import translations from './StandardAddition.i18n'
+import translations from '../../i18n/addition/StandardAddition.i18n'
 
 interface Props { a: number; b: number; onCorrect: () => void; onWrong: (answer: number) => void }
 

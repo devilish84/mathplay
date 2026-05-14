@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useTranslation, useLang } from '../i18n'
-import translations from './GameScreen.i18n'
+import translations from '../i18n/common/GameScreen.i18n'
 import Summary from './Summary'
 import ColumnSubtraction from '../subtraction/column/ColumnSubtraction'
 import StandardQuestion from '../subtraction/standard/StandardQuestion'

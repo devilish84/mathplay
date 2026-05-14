@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useLang } from '../../i18n'
-import i18n, { type BorrowingHintStrings } from './BorrowingHint.i18n'
+import i18n, { type BorrowingHintStrings } from '../../i18n/subtraction/BorrowingHint.i18n'
 
 function simulateBorrow(aDigits: number[], bDigits: number[]) {
   const n    = aDigits.length

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { useTranslation, useLang } from '../i18n'
-import translations from './SequenceGame.i18n'
+import translations from '../i18n/sequences/SequenceGame.i18n'
 import Summary from '../common/Summary'
 import { startGame, scorePoint, nextQuestion, endGame } from '../store/gameSlice'
 import { SEQ_SHOW, SEQ_ASK } from './levels'

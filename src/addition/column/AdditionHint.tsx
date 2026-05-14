@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useLang } from '../../i18n'
-import i18n, { type AdditionHintStrings } from './AdditionHint.i18n'
+import i18n, { type AdditionHintStrings } from '../../i18n/addition/AdditionHint.i18n'
 
 interface Props { a: number; b: number }
 

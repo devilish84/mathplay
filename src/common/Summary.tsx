@@ -1,5 +1,5 @@
 import { useTranslation } from '../i18n'
-import translations from './Summary.i18n'
+import translations from '../i18n/common/Summary.i18n'
 
 interface Props {
   score: number

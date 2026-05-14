@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from '../../i18n'
-import translations from './StandardQuestion.i18n'
+import translations from '../../i18n/subtraction/StandardQuestion.i18n'
 
 interface Props { a: number; b: number; onCorrect: () => void; onWrong: (answer: number) => void }
 
@@ -30,10 +30,10 @@ export default function StandardQuestion({ a, b, onCorrect, onWrong }: Props) {
       <input
         ref={inputRef}
         className={`answer-input ${checked ? (isCorrect ? 'correct' : 'wrong') : ''}`}
-        type="number"
+        type="text"
         inputMode="numeric"
         value={value}
-        onChange={(e) => !checked && setValue(e.target.value)}
+        onChange={(e) => !checked && setValue(e.target.value.replace(/\D/g, ''))}
         onKeyDown={(e) => e.key === 'Enter' && check()}
         disabled={checked}
         placeholder="?"

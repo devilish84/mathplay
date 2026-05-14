@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { setLanguage } from '../store/settingsSlice'
 import { useTranslation, LANGUAGES } from '../i18n'
-import translations from './Toolbar.i18n'
+import translations from '../i18n/common/Toolbar.i18n'
 import type { RootState } from '../store'
 import type { Session } from '../types'
 
