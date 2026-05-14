@@ -90,8 +90,14 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
   const colLabels    = [t('hundreds'), t('tens'), t('ones')]
   const getLabel     = (i: number) => colLabels[cols - 1 - i] ?? ''
 
+  // Which column currently needs the child to compute the borrow sum?
+  const pendingBorrowCol = aCols.findIndex((_, i) =>
+    i > 0 && borrows[i - 1] && i in borrowSums && !borrowSumCorrect(i)
+  )
+
   return (
     <div className="column-subtraction">
+      <div className="column-subtraction-layout">
       <div className="column-numbers">
         {!checked && (
           <div className="column-row col-label-row">
@@ -126,30 +132,11 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
                 onClick={() => canBorrow && toggleBorrow(i)}
                 title={canBorrow ? t('clickToBorrow') : undefined}
               >
-                {d === null ? '' : receives && i in borrowSums ? (
-                  borrowSumCorrect(i) ? (
-                    <span className="borrowed-received">{effectiveA[i]}</span>
-                  ) : (
-                    <span className="borrow-sum-prompt">
-                      <span className="borrow-sum-label">{d}+10=</span>
-                      <input
-                        ref={(el) => { borrowRefs.current[i] = el }}
-                        className="borrow-sum-input"
-                        type="text"
-                        inputMode="numeric"
-                        maxLength={2}
-                        value={borrowSums[i]}
-                        onClick={(e) => e.stopPropagation()}
-                        onChange={(e) => {
-                          const v = e.target.value.replace(/\D/g, '')
-                          setBorrowSums((prev) => ({ ...prev, [i]: v }))
-                        }}
-                      />
-                    </span>
-                  )
-                ) : isModified ? (
-                  <span className={gives ? 'borrowed-reduced' : 'borrowed-received'}>{effectiveA[i]}</span>
-                ) : d}
+                {d === null ? '' : receives && i in borrowSums && !borrowSumCorrect(i)
+                  ? <span className="borrowed-received">?</span>
+                  : isModified
+                    ? <span className={gives ? 'borrowed-reduced' : 'borrowed-received'}>{effectiveA[i]}</span>
+                    : d}
               </div>
             )
           })}
@@ -184,6 +171,28 @@ export default function ColumnSubtraction({ a, b, onCorrect, onWrong }: Props) {
             />
           ))}
         </div>
+      </div>
+
+      {pendingBorrowCol >= 0 && (
+        <div className="borrow-sum-panel">
+          <div className="borrow-sum-equation">
+            <span className="borrow-sum-eq-part">{aCols[pendingBorrowCol]}</span>
+            <span className="borrow-sum-eq-op">+ 10 =</span>
+            <input
+              ref={(el) => { borrowRefs.current[pendingBorrowCol] = el }}
+              className="borrow-sum-eq-input"
+              type="text"
+              inputMode="numeric"
+              maxLength={2}
+              value={borrowSums[pendingBorrowCol] ?? ''}
+              onChange={(e) => {
+                const v = e.target.value.replace(/\D/g, '')
+                setBorrowSums((prev) => ({ ...prev, [pendingBorrowCol]: v }))
+              }}
+            />
+          </div>
+        </div>
+      )}
       </div>
 
       {!checked && (
