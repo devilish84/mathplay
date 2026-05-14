@@ -650,6 +650,12 @@ body {
   border-radius: 8px;
 }
 
+.hl-borrow-calc {
+  background: #d4f7ee;
+  border-radius: 8px;
+  outline: 2px solid #00b894;
+}
+
 .hint-text {
   font-size: 1rem;
   color: #4a4a4a;

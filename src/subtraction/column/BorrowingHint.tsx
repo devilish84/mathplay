@@ -54,12 +54,14 @@ function buildHintSteps(a: number, b: number, s: BorrowingHintStrings) {
     } else {
       steps.push({ text: s.borrow(colLabel(unitsI), colLabel(unitsI - 1), aD[unitsI - 1], work[unitsI - 1], work[unitsI]), phase: 'borrow', revealedCols: [] })
     }
+    steps.push({ text: s.borrowCalc(colLabel(unitsI), aD[unitsI], work[unitsI]), phase: 'borrowCalc', revealedCols: [] })
   } else {
     steps.push({ text: s.lookOk(colLabel(unitsI), aD[unitsI], bD[unitsI]), phase: 'look', revealedCols: [] })
   }
 
   if (cols === 3 && aD[1] < bD[1] && !given[1]) {
     steps.push({ text: s.borrow(colLabel(1), colLabel(0), aD[0], work[0], work[1] + 10), phase: 'borrow2', revealedCols: [] })
+    steps.push({ text: s.borrowCalc(colLabel(1), aD[1], work[1]), phase: 'borrowCalc2', revealedCols: [] })
   }
 
   const revealed: number[] = []
@@ -92,8 +94,9 @@ export default function BorrowingHint({ a, b }: Props) {
   )
 
   const cur             = steps[Math.min(step, steps.length - 1)]
-  const showAnnotations = ['borrow', 'borrow2', 'col0', 'col1', 'col2', 'done'].includes(cur.phase)
+  const showAnnotations = ['borrow', 'borrowCalc', 'borrow2', 'borrowCalc2', 'col0', 'col1', 'col2', 'done'].includes(cur.phase)
   const revealedSet     = new Set(cur.revealedCols ?? [])
+  const borrowCalcCol   = cur.phase === 'borrowCalc' ? cols - 1 : cur.phase === 'borrowCalc2' ? cols - 2 : -1
 
   return (
     <div className="hint-box">
@@ -118,7 +121,7 @@ export default function BorrowingHint({ a, b }: Props) {
                 {showPlus && !showCross && <span className="borrow-add">+10</span>}
                 {showCross && showPlus  && <span className="borrow-add" style={{ fontSize: '0.8rem' }}>+10</span>}
               </div>
-              <div className={`hint-cell hint-cell-num${isHighlighted ? ' hl-col' : ''}`}>
+              <div className={`hint-cell hint-cell-num${isHighlighted ? ' hl-col' : ''}${borrowCalcCol === i ? ' hl-borrow-calc' : ''}`}>
                 {showAnnotations ? work[i] : aD[i]}
               </div>
               <div className="hint-cell hint-cell-num">{bD[i] !== 0 || i === cols - 1 ? bD[i] : ''}</div>
