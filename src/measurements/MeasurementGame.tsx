@@ -15,7 +15,7 @@ export default function MeasurementGame({ level, total, onBack }: Props) {
   const lang     = useLang()
   const dispatch = useDispatch<AppDispatch>()
   const isTest   = useSelector((s: RootState) => s.game.mode === 'test')
-  const levelLabel = getLevelLocale(level.id, lang, level.en, level).label
+  const levelLabel = getLevelLocale(level.id, lang).label
 
   const isMixed = level.op === 'mm_to_cm_mm' || level.op === 'm_to_km_m'
 
@@ -136,7 +136,7 @@ export default function MeasurementGame({ level, total, onBack }: Props) {
         </div>
       </div>
 
-      {checked && !allCorrect && (
+      {checked && !allCorrect && !isTest && (
         <div className="measure-correct-answer">
           {q.wholeAns} {q.wholeUnit}
           {isMixed && <> {q.remAns} {q.remUnit}</>}

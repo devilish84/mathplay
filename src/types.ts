@@ -6,10 +6,6 @@ export interface LevelLocale {
 
 export interface Level {
   id: number | string
-  label: string
-  title: string
-  desc: string
-  en?: LevelLocale
   icon: string
   className: string
   generate: () => { a: number; b: number }
@@ -19,10 +15,6 @@ export interface Level {
 
 export interface SeqLevel {
   id: string
-  label: string
-  title: string
-  desc: string
-  en?: LevelLocale
   icon: string
   className: string
   direction?: 'asc' | 'desc'

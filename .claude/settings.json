@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /home/devilish/projects/mathplay add src/measurements/levels.ts)",
+      "Bash(git -C /home/devilish/projects/mathplay commit -m ' *)",
+      "Bash(mkdir -p /home/devilish/projects/mathplay/src/measurements/images && mv /home/devilish/projects/mathplay/public/images/*.png /home/devilish/projects/mathplay/src/measurements/images/ && ls /home/devilish/projects/mathplay/src/measurements/images/)",
+      "Bash(grep -rn \">[^<]*[a-zA-Z]\\\\|placeholder=\\\\|alt=\\\\|title=\\\\|label=\" /home/devilish/projects/mathplay/src --include=\"*.tsx\" --include=\"*.ts\" ! -path \"*/i18n/*\")",
+      "Bash(grep -rn --include=\"*.tsx\" --include=\"*.ts\" -E \">[^<{]*[A-ZÄÖÅa-zäöå]{4,}[^<{]*<\" /home/devilish/projects/mathplay/src --exclude-dir=i18n)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d['scripts'], indent=2\\)\\)\")",
+      "Bash(node -e ' *)",
+      "Bash(npm test *)",
+      "Bash(file /home/devilish/projects/mathplay/images/missing/*.png)",
+      "Bash(convert --version)",
+      "Bash(git -C /home/devilish/projects/mathplay status)",
+      "Bash(git -C /home/devilish/projects/mathplay log --oneline -3)",
+      "Bash(git -C /home/devilish/projects/mathplay diff --stat HEAD)",
+      "Bash(git -C /home/devilish/projects/mathplay add -A)"
+    ],
+    "additionalDirectories": [
+      "/home/devilish/projects/mathplay/public/images"
+    ]
+  },
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ],
+      "env": {}
+    }
+  }
+}

@@ -16,7 +16,7 @@ export default function SequenceGame({ level, total, onBack }: Props) {
   const lang     = useLang()
   const dispatch = useDispatch<AppDispatch>()
   const isTest   = useSelector((s: RootState) => s.game.mode === 'test')
-  const levelLabel = getLevelLocale(level.id, lang, level.en, level).label
+  const levelLabel = getLevelLocale(level.id, lang).label
 
   const [questionNum, setQuestionNum] = useState(0)
   const [score, setScore]             = useState(0)

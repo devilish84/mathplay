@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mathplay.fi/sitemap.xml
+Sitemap: https://mathplay.x84.fi/sitemap.xml

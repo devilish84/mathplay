@@ -6,11 +6,14 @@ import Home from './screens/Home'
 import GameScreen from './common/GameScreen'
 import SequenceGame from './sequences/SequenceGame'
 import MeasurementGame from './measurements/MeasurementGame'
+import UnitArithmeticGame from './measurements/UnitArithmeticGame'
+import VolumeCountGame from './measurements/VolumeCountGame'
+import VolumeMissingGame from './measurements/VolumeMissingGame'
 import GameSetupDialog from './common/GameSetupDialog'
 import { startGame, endGame } from './store/gameSlice'
 import { recordSession } from './store/progressSlice'
 import type { AppDispatch, RootState } from './store'
-import type { AnyEnrichedLevel, EnrichedLevel, EnrichedSeqLevel, EnrichedMeasureLevel } from './levels'
+import type { AnyEnrichedLevel, EnrichedLevel, EnrichedSeqLevel, EnrichedMeasureLevel, EnrichedArithLevel, EnrichedVolumeLevel, EnrichedMissingLevel } from './levels'
 import type { GameMode } from './store/gameSlice'
 
 interface Selection {
@@ -29,7 +32,19 @@ function isSeqLevel(l: AnyEnrichedLevel): l is EnrichedSeqLevel {
 }
 
 function isMeasureLevel(l: AnyEnrichedLevel): l is EnrichedMeasureLevel {
-  return l.category === 'measure'
+  return l.category === 'measure' && 'op' in l
+}
+
+function isArithLevel(l: AnyEnrichedLevel): l is EnrichedArithLevel {
+  return (l as EnrichedArithLevel).kind === 'arith'
+}
+
+function isVolumeLevel(l: AnyEnrichedLevel): l is EnrichedVolumeLevel {
+  return (l as EnrichedVolumeLevel).kind === 'volume'
+}
+
+function isMissingLevel(l: AnyEnrichedLevel): l is EnrichedMissingLevel {
+  return (l as EnrichedMissingLevel).kind === 'missing'
 }
 
 export default function App() {
@@ -85,6 +100,24 @@ export default function App() {
           <Home onSelect={handleSelect} />
         ) : isSeqLevel(selection.level) ? (
           <SequenceGame
+            level={selection.level}
+            total={config?.total ?? 10}
+            onBack={handleBack}
+          />
+        ) : isVolumeLevel(selection.level) ? (
+          <VolumeCountGame
+            level={selection.level}
+            total={config?.total ?? 10}
+            onBack={handleBack}
+          />
+        ) : isMissingLevel(selection.level) ? (
+          <VolumeMissingGame
+            level={selection.level}
+            total={config?.total ?? 10}
+            onBack={handleBack}
+          />
+        ) : isArithLevel(selection.level) ? (
+          <UnitArithmeticGame
             level={selection.level}
             total={config?.total ?? 10}
             onBack={handleBack}

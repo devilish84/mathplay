@@ -5,6 +5,8 @@ type LevelTranslations = Record<string, Record<string, LevelLocale>>
 export const LEVEL_LOCALES: LevelTranslations = {
   // ── Subtraction ──────────────────────────────────────────────────────────
   '1': {
+    fi: { label: 'Taso 1',  title: 'Pienet luvut',                     desc: 'Esim. 5 − 4' },
+    en: { label: 'Level 1', title: 'Small numbers',                    desc: 'e.g. 5 − 4' },
     sv: { label: 'Nivå 1',  title: 'Små tal',                          desc: 'T.ex. 5 − 4' },
     nb: { label: 'Nivå 1',  title: 'Små tall',                         desc: 'F.eks. 5 − 4' },
     de: { label: 'Stufe 1', title: 'Kleine Zahlen',                    desc: 'z.B. 5 − 4' },
@@ -14,6 +16,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Tase 1',  title: 'Väikesed arvud',                   desc: 'Nt. 5 − 4' },
   },
   '2': {
+    fi: { label: 'Taso 2',  title: 'Kymmenet — vaakasuora',            desc: 'Esim. 15 − 9' },
+    en: { label: 'Level 2', title: 'Tens — horizontal',                desc: 'e.g. 15 − 9' },
     sv: { label: 'Nivå 2',  title: 'Tiotal — vågrätt',                 desc: 'T.ex. 15 − 9' },
     nb: { label: 'Nivå 2',  title: 'Titall — vannrett',                desc: 'F.eks. 15 − 9' },
     de: { label: 'Stufe 2', title: 'Zehner — waagrecht',               desc: 'z.B. 15 − 9' },
@@ -23,6 +27,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Tase 2',  title: 'Kümnendid — horisontaalselt',      desc: 'Nt. 15 − 9' },
   },
   '3': {
+    fi: { label: 'Taso 2',  title: 'Kymmenet — allekkain',             desc: 'Esim. 15 − 9' },
+    en: { label: 'Level 2', title: 'Tens — column',                    desc: 'e.g. 15 − 9' },
     sv: { label: 'Nivå 2',  title: 'Tiotal — kolumn',                  desc: 'T.ex. 15 − 9' },
     nb: { label: 'Nivå 2',  title: 'Titall — loddrett',                desc: 'F.eks. 15 − 9' },
     de: { label: 'Stufe 2', title: 'Zehner — schriftlich',             desc: 'z.B. 15 − 9' },
@@ -32,6 +38,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Tase 2',  title: 'Kümnendid — veerus',               desc: 'Nt. 15 − 9' },
   },
   '4': {
+    fi: { label: 'Taso 3',  title: 'Kaksinumeroiset — vaakasuora',     desc: 'Esim. 34 − 16' },
+    en: { label: 'Level 3', title: 'Two-digit — horizontal',           desc: 'e.g. 34 − 16' },
     sv: { label: 'Nivå 3',  title: 'Tvåsiffriga — vågrätt',            desc: 'T.ex. 34 − 16' },
     nb: { label: 'Nivå 3',  title: 'Tosifrede — vannrett',             desc: 'F.eks. 34 − 16' },
     de: { label: 'Stufe 3', title: 'Zweistellig — waagrecht',          desc: 'z.B. 34 − 16' },
@@ -41,6 +49,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Tase 3',  title: 'Kahekohalised — horisontaalselt',  desc: 'Nt. 34 − 16' },
   },
   '5': {
+    fi: { label: 'Taso 3',  title: 'Kaksinumeroiset — allekkain',      desc: 'Esim. 34 − 16' },
+    en: { label: 'Level 3', title: 'Two-digit — column',               desc: 'e.g. 34 − 16' },
     sv: { label: 'Nivå 3',  title: 'Tvåsiffriga — kolumn',             desc: 'T.ex. 34 − 16' },
     nb: { label: 'Nivå 3',  title: 'Tosifrede — loddrett',             desc: 'F.eks. 34 − 16' },
     de: { label: 'Stufe 3', title: 'Zweistellig — schriftlich',        desc: 'z.B. 34 − 16' },
@@ -50,6 +60,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Tase 3',  title: 'Kahekohalised — veerus',           desc: 'Nt. 34 − 16' },
   },
   '6': {
+    fi: { label: 'Taso 4',  title: 'Sadat — allekkain',                desc: 'Esim. 205 − 39' },
+    en: { label: 'Level 4', title: 'Hundreds — column',                desc: 'e.g. 205 − 39' },
     sv: { label: 'Nivå 4',  title: 'Hundratal — kolumn',               desc: 'T.ex. 205 − 39' },
     nb: { label: 'Nivå 4',  title: 'Hundretall — loddrett',            desc: 'F.eks. 205 − 39' },
     de: { label: 'Stufe 4', title: 'Hunderter — schriftlich',          desc: 'z.B. 205 − 39' },
@@ -61,6 +73,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
 
   // ── Addition ─────────────────────────────────────────────────────────────
   'a1': {
+    fi: { label: 'Taso 1',  title: 'Pienet luvut',                     desc: 'Esim. 7 + 8' },
+    en: { label: 'Level 1', title: 'Small numbers',                    desc: 'e.g. 7 + 8' },
     sv: { label: 'Nivå 1',  title: 'Små tal',                          desc: 'T.ex. 7 + 8' },
     nb: { label: 'Nivå 1',  title: 'Små tall',                         desc: 'F.eks. 7 + 8' },
     de: { label: 'Stufe 1', title: 'Kleine Zahlen',                    desc: 'z.B. 7 + 8' },
@@ -70,6 +84,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Tase 1',  title: 'Väikesed arvud',                   desc: 'Nt. 7 + 8' },
   },
   'a2': {
+    fi: { label: 'Taso 2',  title: 'Kymmenet — vaakasuora',            desc: 'Esim. 15 + 9' },
+    en: { label: 'Level 2', title: 'Tens — horizontal',                desc: 'e.g. 15 + 9' },
     sv: { label: 'Nivå 2',  title: 'Tiotal — vågrätt',                 desc: 'T.ex. 15 + 9' },
     nb: { label: 'Nivå 2',  title: 'Titall — vannrett',                desc: 'F.eks. 15 + 9' },
     de: { label: 'Stufe 2', title: 'Zehner — waagrecht',               desc: 'z.B. 15 + 9' },
@@ -79,6 +95,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Tase 2',  title: 'Kümnendid — horisontaalselt',      desc: 'Nt. 15 + 9' },
   },
   'a3': {
+    fi: { label: 'Taso 2',  title: 'Kymmenet — allekkain',             desc: 'Esim. 15 + 9' },
+    en: { label: 'Level 2', title: 'Tens — column',                    desc: 'e.g. 15 + 9' },
     sv: { label: 'Nivå 2',  title: 'Tiotal — kolumn',                  desc: 'T.ex. 15 + 9' },
     nb: { label: 'Nivå 2',  title: 'Titall — loddrett',                desc: 'F.eks. 15 + 9' },
     de: { label: 'Stufe 2', title: 'Zehner — schriftlich',             desc: 'z.B. 15 + 9' },
@@ -88,6 +106,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Tase 2',  title: 'Kümnendid — veerus',               desc: 'Nt. 15 + 9' },
   },
   'a4': {
+    fi: { label: 'Taso 3',  title: 'Kaksinumeroiset — vaakasuora',     desc: 'Esim. 34 + 27' },
+    en: { label: 'Level 3', title: 'Two-digit — horizontal',           desc: 'e.g. 34 + 27' },
     sv: { label: 'Nivå 3',  title: 'Tvåsiffriga — vågrätt',            desc: 'T.ex. 34 + 27' },
     nb: { label: 'Nivå 3',  title: 'Tosifrede — vannrett',             desc: 'F.eks. 34 + 27' },
     de: { label: 'Stufe 3', title: 'Zweistellig — waagrecht',          desc: 'z.B. 34 + 27' },
@@ -97,6 +117,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Tase 3',  title: 'Kahekohalised — horisontaalselt',  desc: 'Nt. 34 + 27' },
   },
   'a5': {
+    fi: { label: 'Taso 3',  title: 'Kaksinumeroiset — allekkain',      desc: 'Esim. 34 + 27' },
+    en: { label: 'Level 3', title: 'Two-digit — column',               desc: 'e.g. 34 + 27' },
     sv: { label: 'Nivå 3',  title: 'Tvåsiffriga — kolumn',             desc: 'T.ex. 34 + 27' },
     nb: { label: 'Nivå 3',  title: 'Tosifrede — loddrett',             desc: 'F.eks. 34 + 27' },
     de: { label: 'Stufe 3', title: 'Zweistellig — schriftlich',        desc: 'z.B. 34 + 27' },
@@ -106,6 +128,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Tase 3',  title: 'Kahekohalised — veerus',           desc: 'Nt. 34 + 27' },
   },
   'a6': {
+    fi: { label: 'Taso 4',  title: 'Kolminumeroiset — allekkain',      desc: 'Esim. 234 + 167' },
+    en: { label: 'Level 4', title: 'Three-digit — column',             desc: 'e.g. 234 + 167' },
     sv: { label: 'Nivå 4',  title: 'Tresiffriga — kolumn',             desc: 'T.ex. 234 + 167' },
     nb: { label: 'Nivå 4',  title: 'Tresifrede — loddrett',            desc: 'F.eks. 234 + 167' },
     de: { label: 'Stufe 4', title: 'Dreistellig — schriftlich',        desc: 'z.B. 234 + 167' },
@@ -117,6 +141,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
 
   // ── Multiplication ────────────────────────────────────────────────────────
   'm1': {
+    fi: { label: '1× taulu', title: '1× kertotaulu',                   desc: 'Esim. 1 × 7' },
+    en: { label: '1× table', title: '1× multiplication table',         desc: 'e.g. 1 × 7' },
     sv: { label: '1×',  title: '1× multiplikationstabell',  desc: 'T.ex. 1 × 7' },
     nb: { label: '1×',  title: '1× multiplikasjonstabell',  desc: 'F.eks. 1 × 7' },
     de: { label: '1×',  title: '1er-Einmaleins',            desc: 'z.B. 1 × 7' },
@@ -126,6 +152,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: '1×',  title: '1 korrutustabel',           desc: 'Nt. 1 × 7' },
   },
   'm2': {
+    fi: { label: '2× taulu', title: '2× kertotaulu',                   desc: 'Esim. 2 × 7' },
+    en: { label: '2× table', title: '2× multiplication table',         desc: 'e.g. 2 × 7' },
     sv: { label: '2×',  title: '2× multiplikationstabell',  desc: 'T.ex. 2 × 7' },
     nb: { label: '2×',  title: '2× multiplikasjonstabell',  desc: 'F.eks. 2 × 7' },
     de: { label: '2×',  title: '2er-Einmaleins',            desc: 'z.B. 2 × 7' },
@@ -135,6 +163,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: '2×',  title: '2 korrutustabel',           desc: 'Nt. 2 × 7' },
   },
   'm3': {
+    fi: { label: '3× taulu', title: '3× kertotaulu',                   desc: 'Esim. 3 × 7' },
+    en: { label: '3× table', title: '3× multiplication table',         desc: 'e.g. 3 × 7' },
     sv: { label: '3×',  title: '3× multiplikationstabell',  desc: 'T.ex. 3 × 7' },
     nb: { label: '3×',  title: '3× multiplikasjonstabell',  desc: 'F.eks. 3 × 7' },
     de: { label: '3×',  title: '3er-Einmaleins',            desc: 'z.B. 3 × 7' },
@@ -144,6 +174,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: '3×',  title: '3 korrutustabel',           desc: 'Nt. 3 × 7' },
   },
   'm4': {
+    fi: { label: '4× taulu', title: '4× kertotaulu',                   desc: 'Esim. 4 × 7' },
+    en: { label: '4× table', title: '4× multiplication table',         desc: 'e.g. 4 × 7' },
     sv: { label: '4×',  title: '4× multiplikationstabell',  desc: 'T.ex. 4 × 7' },
     nb: { label: '4×',  title: '4× multiplikasjonstabell',  desc: 'F.eks. 4 × 7' },
     de: { label: '4×',  title: '4er-Einmaleins',            desc: 'z.B. 4 × 7' },
@@ -153,6 +185,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: '4×',  title: '4 korrutustabel',           desc: 'Nt. 4 × 7' },
   },
   'm5': {
+    fi: { label: '5× taulu', title: '5× kertotaulu',                   desc: 'Esim. 5 × 7' },
+    en: { label: '5× table', title: '5× multiplication table',         desc: 'e.g. 5 × 7' },
     sv: { label: '5×',  title: '5× multiplikationstabell',  desc: 'T.ex. 5 × 7' },
     nb: { label: '5×',  title: '5× multiplikasjonstabell',  desc: 'F.eks. 5 × 7' },
     de: { label: '5×',  title: '5er-Einmaleins',            desc: 'z.B. 5 × 7' },
@@ -162,6 +196,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: '5×',  title: '5 korrutustabel',           desc: 'Nt. 5 × 7' },
   },
   'm6': {
+    fi: { label: '6× taulu', title: '6× kertotaulu',                   desc: 'Esim. 6 × 7' },
+    en: { label: '6× table', title: '6× multiplication table',         desc: 'e.g. 6 × 7' },
     sv: { label: '6×',  title: '6× multiplikationstabell',  desc: 'T.ex. 6 × 7' },
     nb: { label: '6×',  title: '6× multiplikasjonstabell',  desc: 'F.eks. 6 × 7' },
     de: { label: '6×',  title: '6er-Einmaleins',            desc: 'z.B. 6 × 7' },
@@ -171,6 +207,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: '6×',  title: '6 korrutustabel',           desc: 'Nt. 6 × 7' },
   },
   'm7': {
+    fi: { label: '7× taulu', title: '7× kertotaulu',                   desc: 'Esim. 7 × 7' },
+    en: { label: '7× table', title: '7× multiplication table',         desc: 'e.g. 7 × 7' },
     sv: { label: '7×',  title: '7× multiplikationstabell',  desc: 'T.ex. 7 × 7' },
     nb: { label: '7×',  title: '7× multiplikasjonstabell',  desc: 'F.eks. 7 × 7' },
     de: { label: '7×',  title: '7er-Einmaleins',            desc: 'z.B. 7 × 7' },
@@ -180,6 +218,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: '7×',  title: '7 korrutustabel',           desc: 'Nt. 7 × 7' },
   },
   'm8': {
+    fi: { label: '8× taulu', title: '8× kertotaulu',                   desc: 'Esim. 8 × 7' },
+    en: { label: '8× table', title: '8× multiplication table',         desc: 'e.g. 8 × 7' },
     sv: { label: '8×',  title: '8× multiplikationstabell',  desc: 'T.ex. 8 × 7' },
     nb: { label: '8×',  title: '8× multiplikasjonstabell',  desc: 'F.eks. 8 × 7' },
     de: { label: '8×',  title: '8er-Einmaleins',            desc: 'z.B. 8 × 7' },
@@ -189,6 +229,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: '8×',  title: '8 korrutustabel',           desc: 'Nt. 8 × 7' },
   },
   'm9': {
+    fi: { label: '9× taulu', title: '9× kertotaulu',                   desc: 'Esim. 9 × 7' },
+    en: { label: '9× table', title: '9× multiplication table',         desc: 'e.g. 9 × 7' },
     sv: { label: '9×',  title: '9× multiplikationstabell',  desc: 'T.ex. 9 × 7' },
     nb: { label: '9×',  title: '9× multiplikasjonstabell',  desc: 'F.eks. 9 × 7' },
     de: { label: '9×',  title: '9er-Einmaleins',            desc: 'z.B. 9 × 7' },
@@ -198,6 +240,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: '9×',  title: '9 korrutustabel',           desc: 'Nt. 9 × 7' },
   },
   'm10': {
+    fi: { label: '10× taulu', title: '10× kertotaulu',                 desc: 'Esim. 10 × 7' },
+    en: { label: '10× table', title: '10× multiplication table',       desc: 'e.g. 10 × 7' },
     sv: { label: '10×', title: '10× multiplikationstabell', desc: 'T.ex. 10 × 7' },
     nb: { label: '10×', title: '10× multiplikasjonstabell', desc: 'F.eks. 10 × 7' },
     de: { label: '10×', title: '10er-Einmaleins',           desc: 'z.B. 10 × 7' },
@@ -207,6 +251,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: '10×', title: '10 korrutustabel',          desc: 'Nt. 10 × 7' },
   },
   'mx': {
+    fi: { label: 'Sekataulu',  title: 'Kaikki kertotaulut',            desc: 'Esim. 7 × 8' },
+    en: { label: 'Mixed',      title: 'All multiplication tables',     desc: 'e.g. 7 × 8' },
     sv: { label: 'Blandad', title: 'Alla multiplikationstabeller', desc: 'T.ex. 7 × 8' },
     nb: { label: 'Blandet',  title: 'Alle multiplikasjonstabeller', desc: 'F.eks. 7 × 8' },
     de: { label: 'Gemischt', title: 'Alle Einmaleins',              desc: 'z.B. 7 × 8' },
@@ -218,6 +264,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
 
   // ── Sequences ────────────────────────────────────────────────────────────
   'seqA': {
+    fi: { label: 'Vähenevä ykköset',          title: 'Vähenevä lukujono ykkösillä',            desc: 'Esim. 20, 18, 16, …' },
+    en: { label: 'Decreasing ones',           title: 'Decreasing sequence — ones',             desc: 'e.g. 20, 18, 16, …' },
     sv: { label: 'Minskande ettor',          title: 'Minskande talföljd — ettor',            desc: 'T.ex. 20, 18, 16, …' },
     nb: { label: 'Synkende enere',           title: 'Synkende tallrekke — enere',            desc: 'F.eks. 20, 18, 16, …' },
     de: { label: 'Absteigend Einer',         title: 'Absteigende Folge — Einer',             desc: 'z.B. 20, 18, 16, …' },
@@ -227,6 +275,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Kahanev ühed',             title: 'Kahanev jada — ühed',                   desc: 'Nt. 20, 18, 16, …' },
   },
   'seqB': {
+    fi: { label: 'Vähenevä kymmenet',         title: 'Vähenevä lukujono kymmenillä',           desc: 'Esim. 100, 90, 80, …' },
+    en: { label: 'Decreasing tens',           title: 'Decreasing sequence — tens',             desc: 'e.g. 100, 90, 80, …' },
     sv: { label: 'Minskande tiotal',         title: 'Minskande talföljd — tiotal',           desc: 'T.ex. 100, 90, 80, …' },
     nb: { label: 'Synkende titall',          title: 'Synkende tallrekke — titall',           desc: 'F.eks. 100, 90, 80, …' },
     de: { label: 'Absteigend Zehner',        title: 'Absteigende Folge — Zehner',            desc: 'z.B. 100, 90, 80, …' },
@@ -236,6 +286,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Kahanev kümnendid',        title: 'Kahanev jada — kümnendid',              desc: 'Nt. 100, 90, 80, …' },
   },
   'seqC': {
+    fi: { label: 'Vähenevä sadat kymmenillä',  title: 'Vähenevä lukujono sadoista kymmenillä',  desc: 'Esim. 500, 470, 440, …' },
+    en: { label: 'Decreasing hundreds by tens', title: 'Decreasing sequence — hundreds by tens', desc: 'e.g. 500, 470, 440, …' },
     sv: { label: 'Minskande hundratal/tiotal', title: 'Minskande talföljd — hundratal i tiotalssteg', desc: 'T.ex. 500, 470, 440, …' },
     nb: { label: 'Synkende hundre/titall',   title: 'Synkende tallrekke — hundre i titallssteg',    desc: 'F.eks. 500, 470, 440, …' },
     de: { label: 'Absteigend Hunderter/Zehner', title: 'Absteigende Folge — Hunderter in Zehnerschritten', desc: 'z.B. 500, 470, 440, …' },
@@ -245,6 +297,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Kahanev sajad/kümnendid',  title: 'Kahanev jada — sajad kümnendite kaupa',         desc: 'Nt. 500, 470, 440, …' },
   },
   'seqD': {
+    fi: { label: 'Vähenevä sadoilla',         title: 'Vähenevä lukujono sadoilla',             desc: 'Esim. 900, 700, 500, …' },
+    en: { label: 'Decreasing hundreds',       title: 'Decreasing sequence — hundreds',         desc: 'e.g. 900, 700, 500, …' },
     sv: { label: 'Minskande hundratal',      title: 'Minskande talföljd — hundratal',        desc: 'T.ex. 900, 700, 500, …' },
     nb: { label: 'Synkende hundretall',      title: 'Synkende tallrekke — hundretall',       desc: 'F.eks. 900, 700, 500, …' },
     de: { label: 'Absteigend Hunderter',     title: 'Absteigende Folge — Hunderter',         desc: 'z.B. 900, 700, 500, …' },
@@ -254,6 +308,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Kahanev sajad',            title: 'Kahanev jada — sajad',                  desc: 'Nt. 900, 700, 500, …' },
   },
   'seqE': {
+    fi: { label: 'Kasvava ykköset',           title: 'Kasvava lukujono ykkösillä',             desc: 'Esim. 3, 6, 9, …' },
+    en: { label: 'Ascending ones',            title: 'Ascending sequence — ones',              desc: 'e.g. 3, 6, 9, …' },
     sv: { label: 'Ökande ettor',             title: 'Ökande talföljd — ettor',               desc: 'T.ex. 3, 6, 9, …' },
     nb: { label: 'Stigende enere',           title: 'Stigende tallrekke — enere',            desc: 'F.eks. 3, 6, 9, …' },
     de: { label: 'Aufsteigend Einer',        title: 'Aufsteigende Folge — Einer',            desc: 'z.B. 3, 6, 9, …' },
@@ -263,6 +319,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Kasvav ühed',              title: 'Kasvav jada — ühed',                    desc: 'Nt. 3, 6, 9, …' },
   },
   'seqF': {
+    fi: { label: 'Kasvava kymmenet',          title: 'Kasvava lukujono kymmenillä',            desc: 'Esim. 10, 30, 50, …' },
+    en: { label: 'Ascending tens',            title: 'Ascending sequence — tens',              desc: 'e.g. 10, 30, 50, …' },
     sv: { label: 'Ökande tiotal',            title: 'Ökande talföljd — tiotal',              desc: 'T.ex. 10, 30, 50, …' },
     nb: { label: 'Stigende titall',          title: 'Stigende tallrekke — titall',           desc: 'F.eks. 10, 30, 50, …' },
     de: { label: 'Aufsteigend Zehner',       title: 'Aufsteigende Folge — Zehner',           desc: 'z.B. 10, 30, 50, …' },
@@ -272,6 +330,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'Kasvav kümnendid',         title: 'Kasvav jada — kümnendid',               desc: 'Nt. 10, 30, 50, …' },
   },
   'seqG': {
+    fi: { label: 'Kasvava vaihtelevat',       title: 'Kasvava lukujono vaihtelevilla askelilla', desc: 'Esim. 5, 20, 35, …' },
+    en: { label: 'Ascending mixed',           title: 'Ascending sequence — varying steps',    desc: 'e.g. 5, 20, 35, …' },
     sv: { label: 'Ökande varierat',          title: 'Ökande talföljd — varierande steg',     desc: 'T.ex. 5, 20, 35, …' },
     nb: { label: 'Stigende variert',         title: 'Stigende tallrekke — varierende steg',  desc: 'F.eks. 5, 20, 35, …' },
     de: { label: 'Aufsteigend gemischt',     title: 'Aufsteigende Folge — wechselnde Schritte', desc: 'z.B. 5, 20, 35, …' },
@@ -283,6 +343,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
 
   // ── Measurements ─────────────────────────────────────────────────────────
   'cm_mm': {
+    fi: { label: 'cm ↔ mm', title: 'Senttimetrit ja millimetrit',      desc: 'Muunna cm millimetreiksi tai millimetrit senttimetreiksi' },
+    en: { label: 'cm ↔ mm', title: 'Centimetres and millimetres',      desc: 'Convert cm to mm or mm to cm' },
     sv: { label: 'cm ↔ mm', title: 'Centimeter och millimeter',        desc: 'Omvandla cm till mm eller mm till cm' },
     nb: { label: 'cm ↔ mm', title: 'Centimeter og millimeter',         desc: 'Konverter cm til mm eller mm til cm' },
     de: { label: 'cm ↔ mm', title: 'Zentimeter und Millimeter',        desc: 'Umrechnen zwischen cm und mm' },
@@ -291,7 +353,31 @@ export const LEVEL_LOCALES: LevelTranslations = {
     cs: { label: 'cm ↔ mm', title: 'Centimetry a milimetry',           desc: 'Převod cm na mm nebo mm na cm' },
     et: { label: 'cm ↔ mm', title: 'Sentimeetrid ja millimeetrid',     desc: 'Teisenda cm mm-ks või mm cm-ks' },
   },
+  'm_cm': {
+    fi: { label: 'm ↔ cm', title: 'Metrit ja senttimetrit',            desc: 'Muunna tasaset cm metreiksi tai metrit senttimetreiksi' },
+    en: { label: 'm ↔ cm', title: 'Metres and centimetres',            desc: 'Convert whole cm to m or m to cm' },
+    sv: { label: 'm ↔ cm', title: 'Meter och centimeter',              desc: 'Omvandla hela cm till m eller m till cm' },
+    nb: { label: 'm ↔ cm', title: 'Meter og centimeter',               desc: 'Konverter hele cm til m eller m til cm' },
+    de: { label: 'm ↔ cm', title: 'Meter und Zentimeter',              desc: 'Umrechnen zwischen m und cm (ganze Zahlen)' },
+    es: { label: 'm ↔ cm', title: 'Metros y centímetros',              desc: 'Convierte cm enteros a m o m a cm' },
+    pt: { label: 'm ↔ cm', title: 'Metros e centímetros',              desc: 'Converte cm inteiros para m ou m para cm' },
+    cs: { label: 'm ↔ cm', title: 'Metry a centimetry',                desc: 'Převod celých cm na m nebo m na cm' },
+    et: { label: 'm ↔ cm', title: 'Meetrid ja sentimeetrid',           desc: 'Teisenda täisarvulised cm m-ks või m cm-ks' },
+  },
+  'cm_to_m_cm': {
+    fi: { label: 'cm → m + cm', title: 'Senttimetrit metreiksi ja senttimetreiksi', desc: 'Muunna cm metreiksi ja senttimetreiksi (esim. 130 cm = 1 m 30 cm)' },
+    en: { label: 'cm → m + cm', title: 'Centimetres to m and cm',      desc: 'Convert cm to metres and cm remainder (e.g. 130 cm = 1 m 30 cm)' },
+    sv: { label: 'cm → m + cm', title: 'Centimeter till m och cm',     desc: 'T.ex. 130 cm = 1 m 30 cm' },
+    nb: { label: 'cm → m + cm', title: 'Centimeter til m og cm',       desc: 'F.eks. 130 cm = 1 m 30 cm' },
+    de: { label: 'cm → m + cm', title: 'Zentimeter in m und cm',       desc: 'z.B. 130 cm = 1 m 30 cm' },
+    es: { label: 'cm → m + cm', title: 'Centímetros a m y cm',         desc: 'Ej. 130 cm = 1 m 30 cm' },
+    pt: { label: 'cm → m + cm', title: 'Centímetros para m e cm',      desc: 'Ex. 130 cm = 1 m 30 cm' },
+    cs: { label: 'cm → m + cm', title: 'Centimetry na m a cm',         desc: 'Např. 130 cm = 1 m 30 cm' },
+    et: { label: 'cm → m + cm', title: 'Sentimeetrid m-ks ja cm-ks',   desc: 'Nt. 130 cm = 1 m 30 cm' },
+  },
   'mm_to_cm_mm': {
+    fi: { label: 'mm → cm + mm', title: 'Millimetrit senttimetreiksi ja millimetreiksi', desc: 'Muunna mm senttimetreiksi ja millimetreiksi (esim. 25 mm = 2 cm 5 mm)' },
+    en: { label: 'mm → cm + mm', title: 'Millimetres to cm and mm',    desc: 'Convert mm to cm and mm remainder (e.g. 25 mm = 2 cm 5 mm)' },
     sv: { label: 'mm → cm + mm', title: 'Millimeter till cm och mm',   desc: 'T.ex. 25 mm = 2 cm 5 mm' },
     nb: { label: 'mm → cm + mm', title: 'Millimeter til cm og mm',     desc: 'F.eks. 25 mm = 2 cm 5 mm' },
     de: { label: 'mm → cm + mm', title: 'Millimeter in cm und mm',     desc: 'z.B. 25 mm = 2 cm 5 mm' },
@@ -301,6 +387,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'mm → cm + mm', title: 'Millimeetrid cm-ks ja mm-ks', desc: 'Nt. 25 mm = 2 cm 5 mm' },
   },
   'km_m': {
+    fi: { label: 'km ↔ m', title: 'Kilometrit ja metrit',              desc: 'Muunna km metreiksi tai metrit kilometreiksi' },
+    en: { label: 'km ↔ m', title: 'Kilometres and metres',             desc: 'Convert km to m or m to km' },
     sv: { label: 'km ↔ m', title: 'Kilometer och meter',               desc: 'Omvandla km till m eller m till km' },
     nb: { label: 'km ↔ m', title: 'Kilometer og meter',                desc: 'Konverter km til m eller m til km' },
     de: { label: 'km ↔ m', title: 'Kilometer und Meter',               desc: 'Umrechnen zwischen km und m' },
@@ -310,6 +398,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'km ↔ m', title: 'Kilomeetrid ja meetrid',            desc: 'Teisenda km m-ks või m km-ks' },
   },
   'm_to_km_m': {
+    fi: { label: 'm → km + m', title: 'Metrit kilometreiksi ja metreiksi', desc: 'Muunna metrit kilometreiksi ja metreiksi (esim. 1500 m = 1 km 500 m)' },
+    en: { label: 'm → km + m', title: 'Metres to km and m',            desc: 'Convert metres to km and m remainder (e.g. 1500 m = 1 km 500 m)' },
     sv: { label: 'm → km + m', title: 'Meter till km och m',           desc: 'T.ex. 1500 m = 1 km 500 m' },
     nb: { label: 'm → km + m', title: 'Meter til km og m',             desc: 'F.eks. 1500 m = 1 km 500 m' },
     de: { label: 'm → km + m', title: 'Meter in km und m',             desc: 'z.B. 1500 m = 1 km 500 m' },
@@ -319,6 +409,8 @@ export const LEVEL_LOCALES: LevelTranslations = {
     et: { label: 'm → km + m', title: 'Meetrid km-ks ja m-ks',         desc: 'Nt. 1500 m = 1 km 500 m' },
   },
   'l_dl': {
+    fi: { label: 'l ↔ dl', title: 'Litrat ja desilitrat',              desc: 'Muunna litrat desilitroiksi tai desilitrat litroiksi' },
+    en: { label: 'l ↔ dl', title: 'Litres and decilitres',             desc: 'Convert l to dl or dl to l' },
     sv: { label: 'l ↔ dl', title: 'Liter och deciliter',               desc: 'Omvandla l till dl eller dl till l' },
     nb: { label: 'l ↔ dl', title: 'Liter og desiliter',                desc: 'Konverter l til dl eller dl til l' },
     de: { label: 'l ↔ dl', title: 'Liter und Deziliter',               desc: 'Umrechnen zwischen l und dl' },
@@ -327,7 +419,20 @@ export const LEVEL_LOCALES: LevelTranslations = {
     cs: { label: 'l ↔ dl', title: 'Litry a decilitry',                 desc: 'Převod l na dl nebo dl na l' },
     et: { label: 'l ↔ dl', title: 'Liitrid ja detsiliitrid',           desc: 'Teisenda l dl-ks või dl l-ks' },
   },
+  'mix_simple': {
+    fi: { label: 'Sekoitus',   title: 'Muunnokset sekaisin',           desc: 'cm↔mm, m↔cm, km↔m ja l↔dl — kaikki muunnokset satunnaisessa järjestyksessä' },
+    en: { label: 'Mix',        title: 'Mixed conversions',             desc: 'cm↔mm, m↔cm, km↔m and l↔dl — all conversions in random order' },
+    sv: { label: 'Blandat',    title: 'Blandade omvandlingar',         desc: 'cm↔mm, m↔cm, km↔m och l↔dl — alla omvandlingar i slumpmässig ordning' },
+    nb: { label: 'Blandet',    title: 'Blandede konverteringer',       desc: 'cm↔mm, m↔cm, km↔m og l↔dl — alle konverteringer i tilfeldig rekkefølge' },
+    de: { label: 'Gemischt',   title: 'Gemischte Umrechnungen',        desc: 'cm↔mm, m↔cm, km↔m und l↔dl — alle Umrechnungen in zufälliger Reihenfolge' },
+    es: { label: 'Mixto',      title: 'Conversiones mezcladas',        desc: 'cm↔mm, m↔cm, km↔m y l↔dl — todas las conversiones en orden aleatorio' },
+    pt: { label: 'Misto',      title: 'Conversões misturadas',         desc: 'cm↔mm, m↔cm, km↔m e l↔dl — todas as conversões em ordem aleatória' },
+    cs: { label: 'Smíšené',    title: 'Smíšené převody',               desc: 'cm↔mm, m↔cm, km↔m a l↔dl — všechny převody v náhodném pořadí' },
+    et: { label: 'Segatud',    title: 'Segatud teisendused',           desc: 'cm↔mm, m↔cm, km↔m ja l↔dl — kõik teisendused juhuslikus järjekorras' },
+  },
   'dl_to_l_dl': {
+    fi: { label: 'dl → l + dl', title: 'Desilitrat litroiksi ja desilitroiksi', desc: 'Muunna dl litroiksi ja desilitroiksi (esim. 15 dl = 1 l 5 dl)' },
+    en: { label: 'dl → l + dl', title: 'Decilitres to l and dl',       desc: 'Convert dl to litres and dl remainder (e.g. 15 dl = 1 l 5 dl)' },
     sv: { label: 'dl → l + dl', title: 'Deciliter till l och dl',      desc: 'T.ex. 15 dl = 1 l 5 dl' },
     nb: { label: 'dl → l + dl', title: 'Desiliter til l og dl',        desc: 'F.eks. 15 dl = 1 l 5 dl' },
     de: { label: 'dl → l + dl', title: 'Deziliter in l und dl',        desc: 'z.B. 15 dl = 1 l 5 dl' },
@@ -336,15 +441,66 @@ export const LEVEL_LOCALES: LevelTranslations = {
     cs: { label: 'dl → l + dl', title: 'Decilitry na l a dl',          desc: 'Např. 15 dl = 1 l 5 dl' },
     et: { label: 'dl → l + dl', title: 'Detsiliitrid l-ks ja dl-ks',   desc: 'Nt. 15 dl = 1 l 5 dl' },
   },
+  'l_dl_arith': {
+    fi: { label: 'l ja dl laskut',  title: 'Litrat ja desilitrat — plus ja miinus', desc: 'Laske litroja ja desilitroja (esim. 1 l – 3 dl = 7 dl)' },
+    en: { label: 'l and dl sums',   title: 'Litres and decilitres — add & subtract', desc: 'Add and subtract litres and decilitres (e.g. 1 l – 3 dl = 7 dl)' },
+    sv: { label: 'l och dl räkna',  title: 'Liter och deciliter — plus och minus',  desc: 'Räkna liter och deciliter (t.ex. 1 l – 3 dl = 7 dl)' },
+    nb: { label: 'l og dl regning', title: 'Liter og desiliter — pluss og minus',   desc: 'Regn med liter og desiliter (f.eks. 1 l – 3 dl = 7 dl)' },
+    de: { label: 'l und dl rechnen', title: 'Liter und Deziliter — plus und minus', desc: 'Rechnen mit Liter und Deziliter (z.B. 1 l – 3 dl = 7 dl)' },
+    es: { label: 'l y dl sumas',    title: 'Litros y decilitros — sumar y restar',  desc: 'Sumar y restar litros y decilitros (ej. 1 l – 3 dl = 7 dl)' },
+    pt: { label: 'l e dl somas',    title: 'Litros e decilitros — somar e subtrair', desc: 'Somar e subtrair litros e decilitros (ex. 1 l – 3 dl = 7 dl)' },
+    cs: { label: 'l a dl počítání', title: 'Litry a decilitry — plus a mínus',      desc: 'Počítejte s litry a decilitry (např. 1 l – 3 dl = 7 dl)' },
+    et: { label: 'l ja dl arvutus', title: 'Liitrid ja detsiliitrid — liitmine ja lahutamine', desc: 'Arvuta liitritega ja detsiliitritega (nt. 1 l – 3 dl = 7 dl)' },
+  },
+  'm_cm_arith': {
+    fi: { label: 'm ja cm laskut',  title: 'Metrit ja senttimetrit — plus ja miinus', desc: 'Laske metrejä ja senttimetrejä (esim. 1 m – 20 cm = 80 cm)' },
+    en: { label: 'm and cm sums',   title: 'Metres and centimetres — add & subtract', desc: 'Add and subtract metres and centimetres (e.g. 1 m – 20 cm = 80 cm)' },
+    sv: { label: 'm och cm räkna',  title: 'Meter och centimeter — plus och minus',   desc: 'Räkna meter och centimeter (t.ex. 1 m – 20 cm = 80 cm)' },
+    nb: { label: 'm og cm regning', title: 'Meter og centimeter — pluss og minus',    desc: 'Regn med meter og centimeter (f.eks. 1 m – 20 cm = 80 cm)' },
+    de: { label: 'm und cm rechnen', title: 'Meter und Zentimeter — plus und minus',  desc: 'Rechnen mit Meter und Zentimeter (z.B. 1 m – 20 cm = 80 cm)' },
+    es: { label: 'm y cm sumas',    title: 'Metros y centímetros — sumar y restar',   desc: 'Sumar y restar metros y centímetros (ej. 1 m – 20 cm = 80 cm)' },
+    pt: { label: 'm e cm somas',    title: 'Metros e centímetros — somar e subtrair', desc: 'Somar e subtrair metros e centímetros (ex. 1 m – 20 cm = 80 cm)' },
+    cs: { label: 'm a cm počítání', title: 'Metry a centimetry — plus a mínus',       desc: 'Počítejte s metry a centimetry (např. 1 m – 20 cm = 80 cm)' },
+    et: { label: 'm ja cm arvutus', title: 'Meetrid ja sentimeetrid — liitmine ja lahutamine', desc: 'Arvuta meetritega ja sentimeetritega (nt. 1 m – 20 cm = 80 cm)' },
+  },
+  'miss_multi': {
+    fi: { label: 'Kannuja yhteensä',   title: 'Montako dl puuttuu litraan?',     desc: 'Laske 1–3 kannun sisältö ja arvaile kuinka paljon puuttuu 1–3 litraan.' },
+    en: { label: 'Multiple pitchers',  title: 'How many dl missing to the litre?', desc: 'Add up 1–3 pitchers and find how many dl are missing to reach 1–3 litres.' },
+    sv: { label: 'Flera kannor',       title: 'Hur många dl saknas till litern?', desc: 'Addera 1–3 kannors innehåll och räkna ut hur mycket som saknas till 1–3 liter.' },
+    nb: { label: 'Flere kanner',       title: 'Hvor mange dl mangler til literen?', desc: 'Legg sammen 1–3 kanner og finn ut hvor mange dl som mangler til 1–3 liter.' },
+    de: { label: 'Mehrere Kannen',     title: 'Wie viele dl fehlen bis zum Liter?', desc: 'Addiere 1–3 Kannen und finde heraus, wie viele dl bis 1–3 Liter fehlen.' },
+    es: { label: 'Varias jarras',      title: '¿Cuántos dl faltan para el litro?', desc: 'Suma 1–3 jarras y calcula cuántos dl faltan para llegar a 1–3 litros.' },
+    pt: { label: 'Vários jarros',      title: 'Quantos dl faltam para o litro?',  desc: 'Some 1–3 jarros e calcula quantos dl faltam para atingir 1–3 litros.' },
+    cs: { label: 'Více džbánů',        title: 'Kolik dl chybí do litru?',        desc: 'Sečti 1–3 džbány a zjisti, kolik dl chybí do 1–3 litrů.' },
+    et: { label: 'Mitu kannu',         title: 'Mitu dl puudub liitrini?',        desc: 'Liida 1–3 kannu ja leia, mitu dl puudub 1–3 liitrini.' },
+  },
+  'miss_1l': {
+    fi: { label: 'Puuttuva dl',        title: 'Kuinka monta dl puuttuu?',        desc: 'Montako desilitraa puuttuu, jotta kannussa olisi 1 litra?' },
+    en: { label: 'Missing dl',         title: 'How many dl are missing?',        desc: 'How many decilitres are missing to make 1 litre?' },
+    sv: { label: 'Saknade dl',         title: 'Hur många dl saknas?',            desc: 'Hur många deciliter saknas för att kannorna ska ha 1 liter?' },
+    nb: { label: 'Manglende dl',       title: 'Hvor mange dl mangler?',          desc: 'Hvor mange desilitere mangler for å fylle til 1 liter?' },
+    de: { label: 'Fehlende dl',        title: 'Wie viele dl fehlen?',            desc: 'Wie viele Deziliter fehlen, damit die Kanne 1 Liter hat?' },
+    es: { label: 'dl que faltan',      title: '¿Cuántos dl faltan?',            desc: '¿Cuántos decilitros faltan para llegar a 1 litro?' },
+    pt: { label: 'dl em falta',        title: 'Quantos dl faltam?',             desc: 'Quantos decilitros faltam para completar 1 litro?' },
+    cs: { label: 'Chybějící dl',       title: 'Kolik dl chybí?',                desc: 'Kolik decilitrů chybí, aby byl v džbánu 1 litr?' },
+    et: { label: 'Puuduv dl',          title: 'Mitu dl puudub?',                desc: 'Mitu detsiliitrit puudub, et kannu mahuks 1 liiter?' },
+  },
+  'mix_arith': {
+    fi: { label: 'Sekoitus laskut',  title: 'Mittayksikkölaskut sekaisin',           desc: 'l/dl ja m/cm plus- ja miinuslaskut sekaisin' },
+    en: { label: 'Mixed sums',       title: 'Mixed unit arithmetic',                 desc: 'l/dl and m/cm addition and subtraction mixed together' },
+    sv: { label: 'Blandat räkna',    title: 'Blandade måttenhetsberäkningar',        desc: 'l/dl och m/cm addition och subtraktion blandat' },
+    nb: { label: 'Blandet regning',  title: 'Blandede måleenhetsoppgaver',           desc: 'l/dl og m/cm addisjon og subtraksjon blandet' },
+    de: { label: 'Gemischt rechnen', title: 'Gemischte Maßeinheiten-Aufgaben',       desc: 'l/dl und m/cm Addition und Subtraktion gemischt' },
+    es: { label: 'Sumas mixtas',     title: 'Aritmética de unidades mixtas',         desc: 'l/dl y m/cm suma y resta mezcladas' },
+    pt: { label: 'Somas mistas',     title: 'Aritmética de unidades mistas',         desc: 'l/dl e m/cm adição e subtração misturadas' },
+    cs: { label: 'Smíšené počítání', title: 'Smíšené úlohy s mírami',               desc: 'l/dl a m/cm sčítání a odčítání dohromady' },
+    et: { label: 'Segatud arvutus',  title: 'Segatud mõõtühiku ülesanded',           desc: 'l/dl ja m/cm liitmine ja lahutamine segamini' },
+  },
 }
 
 export function getLevelLocale(
   id: string | number,
   lang: string,
-  fallbackEn?: { label: string; title: string; desc: string },
-  fallbackFi?: { label: string; title: string; desc: string },
 ): { label: string; title: string; desc: string } {
-  if (lang === 'fi') return fallbackFi ?? fallbackEn ?? { label: String(id), title: String(id), desc: '' }
-  if (lang === 'en') return fallbackEn ?? fallbackFi ?? { label: String(id), title: String(id), desc: '' }
-  return LEVEL_LOCALES[String(id)]?.[lang] ?? fallbackEn ?? fallbackFi ?? { label: String(id), title: String(id), desc: '' }
+  return LEVEL_LOCALES[String(id)]?.[lang] ?? LEVEL_LOCALES[String(id)]?.['en'] ?? { label: String(id), title: String(id), desc: '' }
 }

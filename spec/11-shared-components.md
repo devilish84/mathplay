@@ -89,7 +89,9 @@ End-of-session results screen. Rendered in place of the game by `GameScreen`, `S
 
 Persistent top bar rendered in `App.tsx` outside the route content.
 
-- Displays the current question number and score during an active game (from Redux `game` state)
-- Shows a countdown timer when `game.timeLimit > 0` (test mode); timer is driven by a `setInterval` that dispatches `tickTimer` every second
+- **Only when `game.active === true`:** displays question progress (`n / total tehtävää`), correct count, wrong count, and countdown timer
+- When `game.active === false` (home screen, summary screen), the toolbar shows **nothing except** the language selector — no scores, no counters, no timer
+- Shows a countdown timer when `game.timeLimit > 0` (test mode); timer is driven by a `setInterval` that dispatches `tickTimer` every second; turns red/pulsing when ≤ 60 s remain
+- Wrong count = `Math.max(0, game.question - game.score)` (never negative)
 - Contains the language `<select>` populated from `LANGUAGES`; dispatches `setLanguage` on change
-- "Back" button is shown during an active game session; calls `endGame` dispatch and navigates back to home
+- "Back" button is shown only during an active game session; calls `endGame` dispatch and navigates back to home

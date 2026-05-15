@@ -18,27 +18,17 @@ export interface MeasureQuestion {
 
 export interface MeasureLevel {
   id: string
-  label: string
-  title: string
-  desc: string
-  en?: { label: string; title: string; desc: string }
   icon: string
   className: string
   op: MeasurementOp
   generate: (index: number) => MeasureQuestion
 }
 
-function rand(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
+import { rand } from '../rng'
 
 export const MEASURE_LEVELS: MeasureLevel[] = [
   {
     id: 'cm_mm',
-    label: 'cm ↔ mm',
-    title: 'Senttimetrit ja millimetrit',
-    desc: 'Muunna cm millimetreiksi tai millimetrit senttimetreiksi',
-    en: { label: 'cm ↔ mm', title: 'Centimetres and millimetres', desc: 'Convert cm to mm or mm to cm' },
     icon: '⭐',
     className: 'level-green',
     op: 'cm_to_mm',
@@ -51,10 +41,6 @@ export const MEASURE_LEVELS: MeasureLevel[] = [
   },
   {
     id: 'm_cm',
-    label: 'm ↔ cm',
-    title: 'Metrit ja senttimetrit',
-    desc: 'Muunna tasaset cm metreiksi tai metrit senttimetreiksi',
-    en: { label: 'm ↔ cm', title: 'Metres and centimetres', desc: 'Convert whole cm to m or m to cm' },
     icon: '⭐',
     className: 'level-green',
     op: 'km_to_m',
@@ -67,10 +53,6 @@ export const MEASURE_LEVELS: MeasureLevel[] = [
   },
   {
     id: 'cm_to_m_cm',
-    label: 'cm → m + cm',
-    title: 'Senttimetrit metreiksi ja senttimetreiksi',
-    desc: 'Muunna cm metreiksi ja senttimetreiksi (esim. 130 cm = 1 m 30 cm)',
-    en: { label: 'cm → m + cm', title: 'Centimetres to m and cm', desc: 'Convert cm to metres and cm remainder (e.g. 130 cm = 1 m 30 cm)' },
     icon: '⭐⭐',
     className: 'level-blue',
     op: 'm_to_km_m',
@@ -83,10 +65,6 @@ export const MEASURE_LEVELS: MeasureLevel[] = [
   },
   {
     id: 'mm_to_cm_mm',
-    label: 'mm → cm + mm',
-    title: 'Millimetrit senttimetreiksi ja millimetreiksi',
-    desc: 'Muunna mm senttimetreiksi ja millimetreiksi (esim. 25 mm = 2 cm 5 mm)',
-    en: { label: 'mm → cm + mm', title: 'Millimetres to cm and mm', desc: 'Convert mm to cm and mm remainder (e.g. 25 mm = 2 cm 5 mm)' },
     icon: '⭐⭐',
     className: 'level-blue',
     op: 'mm_to_cm_mm',
@@ -99,10 +77,6 @@ export const MEASURE_LEVELS: MeasureLevel[] = [
   },
   {
     id: 'km_m',
-    label: 'km ↔ m',
-    title: 'Kilometrit ja metrit',
-    desc: 'Muunna km metreiksi tai metrit kilometreiksi',
-    en: { label: 'km ↔ m', title: 'Kilometres and metres', desc: 'Convert km to m or m to km' },
     icon: '⭐',
     className: 'level-green',
     op: 'km_to_m',
@@ -115,10 +89,6 @@ export const MEASURE_LEVELS: MeasureLevel[] = [
   },
   {
     id: 'm_to_km_m',
-    label: 'm → km + m',
-    title: 'Metrit kilometreiksi ja metreiksi',
-    desc: 'Muunna metrit kilometreiksi ja metreiksi (esim. 1500 m = 1 km 500 m)',
-    en: { label: 'm → km + m', title: 'Metres to km and m', desc: 'Convert metres to km and m remainder (e.g. 1500 m = 1 km 500 m)' },
     icon: '⭐⭐',
     className: 'level-blue',
     op: 'm_to_km_m',
@@ -131,10 +101,6 @@ export const MEASURE_LEVELS: MeasureLevel[] = [
   },
   {
     id: 'l_dl',
-    label: 'l ↔ dl',
-    title: 'Litrat ja desilitrat',
-    desc: 'Muunna litrat desilitroiksi tai desilitrat litroiksi',
-    en: { label: 'l ↔ dl', title: 'Litres and decilitres', desc: 'Convert l to dl or dl to l' },
     icon: '⭐',
     className: 'level-green',
     op: 'km_to_m',
@@ -147,10 +113,6 @@ export const MEASURE_LEVELS: MeasureLevel[] = [
   },
   {
     id: 'mix_simple',
-    label: 'Sekoitus',
-    title: 'Muunnokset sekaisin',
-    desc: 'cm↔mm, m↔cm, km↔m ja l↔dl — kaikki muunnokset satunnaisessa järjestyksessä',
-    en: { label: 'Mix', title: 'Mixed conversions', desc: 'cm↔mm, m↔cm, km↔m and l↔dl — all conversions in random order' },
     icon: '⭐⭐',
     className: 'level-blue',
     op: 'km_to_m',
@@ -183,10 +145,6 @@ export const MEASURE_LEVELS: MeasureLevel[] = [
   },
   {
     id: 'dl_to_l_dl',
-    label: 'dl → l + dl',
-    title: 'Desilitrat litroiksi ja desilitroiksi',
-    desc: 'Muunna dl litroiksi ja desilitroiksi (esim. 15 dl = 1 l 5 dl)',
-    en: { label: 'dl → l + dl', title: 'Decilitres to l and dl', desc: 'Convert dl to litres and dl remainder (e.g. 15 dl = 1 l 5 dl)' },
     icon: '⭐⭐',
     className: 'level-blue',
     op: 'm_to_km_m',

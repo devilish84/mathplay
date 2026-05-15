@@ -6,6 +6,9 @@ dist/
 # Terraform — keep local only
 automation/
 
+# Source images (bundled into src/measurements/images/)
+images/
+
 # Playwright
 playwright-report/
 test-results/

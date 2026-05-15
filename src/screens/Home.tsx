@@ -82,7 +82,8 @@ export default function Home({ onSelect }: Props) {
       ) : (
         <div className="task-grid">
           {visible.map((level) => {
-            const loc = getLevelLocale(level.id, lang, level.en, level)
+            const volI18n = 'i18n' in level && level.i18n ? (level.i18n as Record<string, {label:string;title:string;desc:string}>)[lang] ?? (level.i18n as Record<string, {label:string;title:string;desc:string}>)['en'] : null
+            const loc = volI18n ?? getLevelLocale(level.id, lang)
             return (
               <button
                 key={level.id}

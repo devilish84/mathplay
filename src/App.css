@@ -1356,3 +1356,250 @@ body {
 }
 
 .cat-measure { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
+
+/* ── Unit arithmetic game ──────────────────────────────── */
+.game-screen--arith {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.arith-equation {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.arith-part {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #2d3436;
+}
+
+.arith-unit {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #636e72;
+}
+
+.arith-op {
+  font-size: 2.8rem;
+  font-weight: 300;
+  color: #636e72;
+  margin: 0 4px;
+}
+
+.arith-eq {
+  font-size: 2.5rem;
+  color: #636e72;
+  font-weight: 300;
+  margin: 0 4px;
+}
+
+.arith-answer-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.level-badge.level-purple { background: #6c5ce7; }
+
+/* ── Arithmetic conversion helper ──────────────────────── */
+.arith-conv-box {
+  background: #f0f4ff;
+  border: 2px solid #a29bfe;
+  border-radius: 14px;
+  padding: 14px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.arith-conv-box.conv-done {
+  background: #d4f7ee;
+  border-color: #00b894;
+}
+
+.arith-conv-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6c5ce7;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.arith-conv-box.conv-done .arith-conv-label {
+  color: #00b894;
+}
+
+.arith-conv-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.arith-conv-result {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00b894;
+}
+
+/* ── Unit arithmetic hint ──────────────────────────────── */
+.arith-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: #fffbea;
+  border: 2px solid #fdcb6e;
+  border-radius: 14px;
+  padding: 16px 24px;
+  margin-top: 8px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.arith-hint-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.arith-hint-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #e17055;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.arith-hint-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3436;
+}
+
+/* ── Volume count game ─────────────────────────────────── */
+.game-screen--volume {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.volume-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  width: 100%;
+}
+
+.volume-item-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.volume-item-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+.volume-item-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #636e72;
+  text-align: center;
+}
+
+.volume-answer-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* VolumeMissingGame */
+.game-screen--missing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.missing-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 24px 32px;
+}
+
+.missing-answer-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.missing-word {
+  color: #636e72;
+}
+
+.missing-answer-row .measure-input {
+  width: 64px;
+  height: 56px;
+  font-size: 1.6rem;
+  border-radius: 10px;
+}
+
+.missing-pitchers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.missing-pitcher-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.missing-pitcher-img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  background: white;
+  border-radius: 8px;
+}
+
+.missing-fill-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #636e72;
+}
