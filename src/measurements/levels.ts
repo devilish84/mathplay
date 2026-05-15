@@ -146,6 +146,42 @@ export const MEASURE_LEVELS: MeasureLevel[] = [
     },
   },
   {
+    id: 'mix_simple',
+    label: 'Sekoitus',
+    title: 'Muunnokset sekaisin',
+    desc: 'cm↔mm, m↔cm, km↔m ja l↔dl — kaikki muunnokset satunnaisessa järjestyksessä',
+    en: { label: 'Mix', title: 'Mixed conversions', desc: 'cm↔mm, m↔cm, km↔m and l↔dl — all conversions in random order' },
+    icon: '⭐⭐',
+    className: 'level-blue',
+    op: 'km_to_m',
+    generate(index: number) {
+      const forward = index % 2 === 0
+      const type    = Math.floor(Math.random() * 4)
+      if (type === 0) {
+        const cm = rand(1, 50)
+        return forward
+          ? { input: cm,      inputUnit: 'cm', wholeAns: cm * 10, wholeUnit: 'mm', wideInput: cm >= 10 }
+          : { input: cm * 10, inputUnit: 'mm', wholeAns: cm,      wholeUnit: 'cm', wideInput: false }
+      }
+      if (type === 1) {
+        const m = rand(1, 7)
+        return forward
+          ? { input: m,       inputUnit: 'm',  wholeAns: m * 100, wholeUnit: 'cm', wideInput: true }
+          : { input: m * 100, inputUnit: 'cm', wholeAns: m,       wholeUnit: 'm',  wideInput: false }
+      }
+      if (type === 2) {
+        const km = rand(1, 5)
+        return forward
+          ? { input: km,        inputUnit: 'km', wholeAns: km * 1000, wholeUnit: 'm',  wideInput: true }
+          : { input: km * 1000, inputUnit: 'm',  wholeAns: km,        wholeUnit: 'km', wideInput: false }
+      }
+      const l = rand(1, 10)
+      return forward
+        ? { input: l,      inputUnit: 'l',  wholeAns: l * 10, wholeUnit: 'dl', wideInput: false }
+        : { input: l * 10, inputUnit: 'dl', wholeAns: l,      wholeUnit: 'l',  wideInput: false }
+    },
+  },
+  {
     id: 'dl_to_l_dl',
     label: 'dl → l + dl',
     title: 'Desilitrat litroiksi ja desilitroiksi',
