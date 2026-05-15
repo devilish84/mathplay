@@ -50,6 +50,38 @@ export const MEASURE_LEVELS: MeasureLevel[] = [
     },
   },
   {
+    id: 'm_cm',
+    label: 'm ↔ cm',
+    title: 'Metrit ja senttimetrit',
+    desc: 'Muunna tasaset cm metreiksi tai metrit senttimetreiksi',
+    en: { label: 'm ↔ cm', title: 'Metres and centimetres', desc: 'Convert whole cm to m or m to cm' },
+    icon: '⭐',
+    className: 'level-green',
+    op: 'km_to_m',
+    generate(index: number) {
+      const m = rand(1, 7)
+      return index % 2 === 0
+        ? { input: m,       inputUnit: 'm',  wholeAns: m * 100, wholeUnit: 'cm', wideInput: true }
+        : { input: m * 100, inputUnit: 'cm', wholeAns: m,       wholeUnit: 'm',  wideInput: false }
+    },
+  },
+  {
+    id: 'cm_to_m_cm',
+    label: 'cm → m + cm',
+    title: 'Senttimetrit metreiksi ja senttimetreiksi',
+    desc: 'Muunna cm metreiksi ja senttimetreiksi (esim. 130 cm = 1 m 30 cm)',
+    en: { label: 'cm → m + cm', title: 'Centimetres to m and cm', desc: 'Convert cm to metres and cm remainder (e.g. 130 cm = 1 m 30 cm)' },
+    icon: '⭐⭐',
+    className: 'level-blue',
+    op: 'm_to_km_m',
+    generate(_index: number) {
+      const cm = rand(101, 700)
+      const m   = Math.floor(cm / 100)
+      const rem = cm % 100
+      return { input: cm, inputUnit: 'cm', wholeAns: m, wholeUnit: 'm', remAns: rem, remUnit: 'cm', wideInput: false }
+    },
+  },
+  {
     id: 'mm_to_cm_mm',
     label: 'mm → cm + mm',
     title: 'Millimetrit senttimetreiksi ja millimetreiksi',
