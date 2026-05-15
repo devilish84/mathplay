@@ -6,8 +6,8 @@ dist/
 # Terraform — keep local only
 automation/
 
-# Source images (bundled into src/measurements/images/)
-images/
+# Source images (originals, bundled copies are in src/)
+/images/
 
 # Playwright
 playwright-report/
