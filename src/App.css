@@ -4,6 +4,33 @@
   padding: 0;
 }
 
+/* Force light background and dark text on all inputs — prevents mobile dark-mode / autofill black bg */
+input {
+  background-color: #ffffff;
+  color: #2d3436;
+  -webkit-text-fill-color: #2d3436;
+  color-scheme: light;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+  -webkit-text-fill-color: #2d3436;
+  caret-color: #2d3436;
+}
+
+input.correct {
+  background-color: #d4f7ee;
+  -webkit-box-shadow: 0 0 0 1000px #d4f7ee inset;
+  -webkit-text-fill-color: #2d3436;
+}
+
+input.wrong {
+  background-color: #ffe4e4;
+  -webkit-box-shadow: 0 0 0 1000px #ffe4e4 inset;
+  -webkit-text-fill-color: #2d3436;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
