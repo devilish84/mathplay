@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "playwright test",
+    "test:ci": "playwright test tests/deterministic.spec.ts tests/game.spec.ts tests/home.spec.ts --project=chromium",
     "test:report": "playwright show-report"
   },
   "dependencies": {
